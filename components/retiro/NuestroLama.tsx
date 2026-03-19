@@ -39,29 +39,31 @@ export default function NuestroLama() {
           {/* Name overlay at bottom */}
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#5E2A29]/80 to-transparent px-5 py-5 rounded-b-lg">
             <h3 className="font-serif text-[#FBF3DC] text-xl font-semibold">
-              Venerable Lama Tenzin Dorje
+              Venerable Lama Dorje Norbu
             </h3>
             <p className="font-sans text-[#FBF3DC]/80 text-xs tracking-widest uppercase mt-1">
-              Maestro del Linaje Kagyu
+              Guía espiritual del Monasterio Shambala Norbu
             </p>
           </div>
         </div>
 
         <p className="font-sans text-[#724E48] text-[0.9rem] leading-relaxed mb-5">
-          El Venerable Lama Tenzin Dorje nació en el Tíbet y recibió su formación espiritual completa en los grandes monasterios de la tradición Kagyu. Con más de cuarenta años de práctica contemplativa, es reconocido por su profunda realización y su capacidad para transmitir las enseñanzas con claridad y compasión.
+          El Venerable Lama Dorje Norbu es el actual responsable espiritual del monasterio y el encargado de preservar y transmitir su legado. Formado en el Tíbet y con una larga trayectoria en la enseñanza de la práctica contemplativa, combina tradición y adaptación para acompañar a quienes llegan en busca de claridad, sentido y transformación personal.
+          Su enfoque parte de una idea sencilla: cada experiencia, incluso la más inesperada, puede convertirse en una oportunidad de despertar si se sabe mirar con la actitud adecuada.
         </p>
 
         <p className="font-sans text-[#724E48] text-[0.9rem] leading-relaxed mb-6">
-          Ha guiado a miles de estudiantes en toda Europa y América Latina, impartiendo enseñanzas sobre Mahamudra, práctica de Vajrayana y meditación de la naturaleza de la mente.
+          A lo largo de los años, ha guiado a practicantes de distintos lugares del mundo, desarrollando un modelo de retiro que integra silencio, disciplina y acompañamiento personalizado, adaptado a las necesidades de cada visitante.
+          En Shambala Norbu, el Lama Dorje no solo enseña: observa, interpreta y acompaña los procesos individuales, entendiendo que cada camino espiritual es único… y que a veces, lo esencial no es cuestionar la experiencia, sino aprender a sostenerla.
         </p>
 
         {/* Quotes */}
         <div className="bg-[#FBF3DC] rounded-lg px-5 py-5 border-l-2 border-[#A72F27]">
           <blockquote className="font-serif text-[#5E2A29] text-[0.95rem] italic leading-relaxed">
-            "La verdadera práctica espiritual no consiste en huir del mundo, sino en encontrar la paz en el corazón de la experiencia cotidiana."
+            "La mente busca certezas. El despertar empieza cuando dejamos de necesitarlas."
           </blockquote>
           <cite className="block mt-3 font-sans text-[#A72F27] text-[0.75rem] tracking-wider not-italic">
-            — Lama Tenzin Dorje
+            — Lama Dorje Norbu
           </cite>
         </div>
       </div>
