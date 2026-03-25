@@ -21,21 +21,9 @@ export const metadata: Metadata = {
   description: 'Bienvenidos a nuestro centro de retiros espirituales budistas. Descubra la paz interior y la sabiduría a través de prácticas meditativas en la tradición budista tibetana.',
   generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: [{ url: '/LOGO-DAKINI-transparent.png', type: 'image/png' }],
+    shortcut: '/LOGO-DAKINI-transparent.png',
+    apple: '/LOGO-DAKINI-transparent.png',
   },
 }
 
