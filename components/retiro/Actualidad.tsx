@@ -1,31 +1,7 @@
 import Image from "next/image"
+import Link from "next/link"
 
-const noticias = [
-  {
-    img: "/images/news-1.jpg",
-    alt: "Sesión de enseñanza del Dharma en el monasterio",
-    titulo: "Nuevas Enseñanzas del Dharma — Primavera 2025",
-    fecha: "15 Marzo, 2025",
-    extracto:
-      "El Lama impartirá un ciclo de enseñanzas sobre el Mahamudra y la naturaleza de la mente durante el mes de abril.",
-  },
-  {
-    img: "/images/news-2.jpg",
-    alt: "Ceremonia de mandala de arena tibetano",
-    titulo: "Creación del Gran Mandala de Arena",
-    fecha: "2 Febrero, 2025",
-    extracto:
-      "Nuestros monjes crearán un exquisito mandala de arena Kalachakra abierto al público durante toda la semana.",
-  },
-  {
-    img: "/images/news-3.jpg",
-    alt: "Participantes en meditación caminando en el bosque",
-    titulo: "Retiro de Meditación en Silencio — Verano",
-    fecha: "18 Enero, 2025",
-    extracto:
-      "Las inscripciones para el retiro intensivo de verano en silencio de siete días ya están abiertas. Plazas muy limitadas.",
-  },
-]
+import { noticias } from "@/lib/noticias"
 
 export default function Actualidad() {
   return (
@@ -48,8 +24,8 @@ export default function Actualidad() {
         <div className="w-8 h-[2px] bg-[#A72F27] mb-8" aria-hidden="true" />
 
         <ul className="flex flex-col gap-5">
-          {noticias.map((noticia, i) => (
-            <li key={i}>
+          {noticias.map((noticia) => (
+            <li key={noticia.slug}>
               <article className="flex gap-4 bg-[#FFFFFF] rounded-lg overflow-hidden shadow-sm border border-[#E8D8C4]">
                 {/* Thumbnail */}
                 <div className="relative w-24 shrink-0">
@@ -72,6 +48,12 @@ export default function Actualidad() {
                   <p className="font-sans text-[#724E48] text-[0.78rem] leading-relaxed line-clamp-2">
                     {noticia.extracto}
                   </p>
+                  <Link
+                    href={`/noticias/${noticia.slug}`}
+                    className="mt-1 inline-flex w-fit items-center text-[0.72rem] font-sans tracking-[0.15em] uppercase text-[#A72F27] underline underline-offset-2 hover:text-[#8B2520] transition-colors"
+                  >
+                    Leer más
+                  </Link>
                 </div>
               </article>
             </li>
