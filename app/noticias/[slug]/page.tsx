@@ -48,9 +48,9 @@ export default async function NoticiaDetallePage({ params }: DetailPageProps) {
   }
 
   const noticiaIndex = getNoticiaIndexBySlug(slug)
-  const noticiaAnterior = noticiaIndex > 0 ? noticias[noticiaIndex - 1] : null
-  const noticiaSiguiente =
+  const noticiaAnterior =
     noticiaIndex < noticias.length - 1 ? noticias[noticiaIndex + 1] : null
+  const noticiaSiguiente = noticiaIndex > 0 ? noticias[noticiaIndex - 1] : null
 
   return (
     <div className="min-h-screen bg-[#FFFFFF]">
@@ -80,6 +80,13 @@ export default async function NoticiaDetallePage({ params }: DetailPageProps) {
             <time className="mt-4 block font-sans text-[10px] text-[#A72F27] tracking-wider uppercase">
               {noticia.fecha}
             </time>
+            {(noticia.ubicacion || noticia.tipo) && (
+              <p className="mt-2 font-sans text-[0.7rem] text-[#724E48] tracking-[0.12em] uppercase">
+                {noticia.ubicacion}
+                {noticia.ubicacion && noticia.tipo ? " · " : ""}
+                {noticia.tipo}
+              </p>
+            )}
 
             <h1 className="mt-2 font-serif text-[#5E2A29] text-2xl sm:text-3xl font-semibold leading-tight">
               {noticia.titulo}

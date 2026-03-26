@@ -4,51 +4,80 @@ export type Noticia = {
   alt: string
   titulo: string
   fecha: string
+  ubicacion?: string
+  tipo?: string
+  destacada?: boolean
   extracto: string
   contenido: string[]
 }
 
 export const noticias: Noticia[] = [
   {
-    slug: "ensenanzas-dharma-primavera-2025",
+    slug: "despertar-proceso-colectivo",
     img: "/images/news-1.jpg",
-    alt: "Sesion de ensenanza del Dharma en el monasterio",
-    titulo: "Nuevas Ensenanzas del Dharma - Primavera 2025",
-    fecha: "15 Marzo, 2025",
+    alt: "Participantes compartiendo su experiencia al cierre del retiro",
+    titulo: "Experiencia compartida: el despertar como proceso colectivo",
+    fecha: "22 de junio de 2026",
+    ubicacion: "Valle de Nyima",
     extracto:
-      "El Lama impartira un ciclo de ensenanzas sobre el Mahamudra y la naturaleza de la mente durante el mes de abril.",
+      "El retiro ha concluido tras varios días de profunda intensidad emocional y espiritual entre los participantes.",
     contenido: [
-      "Durante el mes de abril celebraremos un nuevo ciclo de ensenanzas abierto a practicantes de distintos niveles. El programa estara centrado en la practica de Mahamudra y en el reconocimiento directo de la naturaleza de la mente.",
-      "Cada encuentro incluira una sesion de exposicion, meditacion guiada y un espacio final para preguntas. El objetivo es que las personas asistentes puedan integrar la practica en su vida diaria, mas alla del retiro puntual.",
-      "La participacion requiere inscripcion previa para organizar el aforo del templo y los materiales de estudio. En los proximos dias compartiremos horarios detallados y recomendaciones para preparar la practica personal antes del inicio.",
+      "El retiro ha concluido tras varios días de profunda intensidad emocional y espiritual entre los participantes. Diversos asistentes han descrito la experiencia como un momento de apertura inesperada, en el que han podido expresar aspectos personales que permanecían ocultos hasta ahora. El proceso ha generado un clima de escucha, vulnerabilidad y conexión poco habitual. Desde el monasterio se recuerda que el despertar no es un estado permanente, sino una posibilidad que cada persona debe integrar en su vida cotidiana.",
     ],
   },
   {
-    slug: "gran-mandala-arena",
+    slug: "afluencia-inesperada-de-visitantes",
     img: "/images/news-2.jpg",
-    alt: "Ceremonia de mandala de arena tibetano",
-    titulo: "Creacion del Gran Mandala de Arena",
-    fecha: "2 Febrero, 2025",
+    alt: "Visitantes llegando al monasterio durante las jornadas abiertas",
+    titulo: "Afluencia inesperada de visitantes tras los últimos acontecimientos",
+    fecha: "19 de junio de 2026",
+    ubicacion: "Valle de Nyima",
     extracto:
-      "Nuestros monjes crearan un exquisito mandala de arena Kalachakra abierto al publico durante toda la semana.",
+      "En los últimos días, el Monasterio Shambala Norbu ha registrado un aumento significativo de visitantes.",
     contenido: [
-      "La comunidad monastica iniciara la construccion de un mandala de arena Kalachakra como practica de contemplacion y ofrenda para el bienestar de todos los seres. El proceso podra visitarse cada dia en horario continuo.",
-      "Ademas de observar el trabajo en directo, se ofreceran breves explicaciones sobre el simbolismo de cada fase y sobre la tradicion que acompana este tipo de ceremonias. Es una oportunidad unica para acercarse a esta practica viva.",
-      "El cierre se realizara con la disolucion ritual del mandala, recordando la impermanencia y la compasion universal. Invitamos a quienes asistan a participar con una actitud de silencio respetuoso y presencia consciente.",
+      "En los últimos días, el Monasterio Shambala Norbu ha registrado un aumento significativo de visitantes interesados en conocer de cerca los acontecimientos recientes. Con el fin de preservar la integridad del retiro, se han habilitado nuevas franjas de acceso y se recomienda a los interesados reservar con antelación. El Venerable Lama Dorje Norbu ha subrayado la importancia de sostener el equilibrio entre apertura y recogimiento: \"Cuando algo despierta interés, también despierta proyección. Nuestra labor es sostener ambos sin perder el centro.\"",
     ],
   },
   {
-    slug: "retiro-silencio-verano",
-    img: "/images/news-3.jpg",
-    alt: "Participantes en meditacion caminando en el bosque",
-    titulo: "Retiro de Meditacion en Silencio - Verano",
-    fecha: "18 Enero, 2025",
+    slug: "practicas-intensivas-de-purificacion",
+    img: "/images/news-1.jpg",
+    alt: "Sesión individual de acompañamiento durante el retiro",
+    titulo: "Un participante es sometido a prácticas intensivas de purificación",
+    fecha: "18 de junio de 2026",
+    ubicacion: "Monasterio Shambala Norbu",
+    tipo: "Comunicado interno",
     extracto:
-      "Las inscripciones para el retiro intensivo de verano en silencio de siete dias ya estan abiertas. Plazas muy limitadas.",
+      "Durante los primeros días del retiro, uno de los participantes ha requerido un proceso intensivo de purificación.",
     contenido: [
-      "Ya esta abierto el periodo de inscripcion para el retiro intensivo de verano en formato de silencio completo. Durante siete dias combinaremos meditacion sentada, meditacion caminando y periodos de descanso consciente.",
-      "El retiro esta pensado para quienes desean profundizar en estabilidad mental, claridad y observacion compasiva. Se recomienda llegar con una practica basica estable, aunque el equipo guiara cada jornada con instrucciones precisas.",
-      "Las plazas son limitadas para preservar la calidad del acompanamiento y el entorno de recogimiento. La inscripcion incluye alojamiento, manutencion y una sesion preparatoria online para resolver dudas practicas antes de la llegada.",
+      "Durante los primeros días del retiro, uno de los participantes ha sido identificado por el Lama como portador de una energía especialmente densa, lo que ha requerido la aplicación de prácticas intensivas de purificación. Estas incluyen sesiones prolongadas de silencio, inmersión en agua fría, trabajo corporal y acompañamiento cercano por parte del equipo del monasterio. Desde la dirección espiritual se recuerda que estos procesos forman parte del camino y que cada experiencia, por incómoda que resulte, es una oportunidad para disolver resistencias y avanzar hacia una comprensión más profunda.",
+    ],
+  },
+  {
+    slug: "posible-manifestacion-de-la-dakini",
+    img: "/images/news-3.jpg",
+    alt: "Comunidad reunida en el templo principal durante un comunicado",
+    titulo: "Posible manifestación de la dakini en Shambala Norbu",
+    fecha: "17 de junio de 2026",
+    ubicacion: "Monasterio Shambala Norbu",
+    tipo: "Comunicado extraordinario",
+    destacada: true,
+    extracto:
+      "La comunidad monástica ha sido testigo de una experiencia espiritual de carácter excepcional.",
+    contenido: [
+      "En los últimos días, la comunidad del Monasterio Shambala Norbu ha sido testigo de una experiencia espiritual de carácter excepcional. Una de las participantes del retiro ha sido reconocida por varios miembros de la comunidad monástica como portadora de signos y cualidades que coinciden de forma sorprendente con las antiguas representaciones de la Dakini conservadas en los murales y textos del monasterio. La coincidencia ha despertado una profunda conmoción, así como un clima de recogimiento y reverencia entre los presentes. Desde la dirección espiritual del centro, el Venerable Lama Dorje Norbu ha invitado a acoger este acontecimiento con humildad y sin precipitación, recordando que hay experiencias que no deben ser comprendidas de inmediato, sino sostenidas con presencia. Por respeto al proceso y a la persona implicada, el monasterio mantendrá la máxima discreción en torno a los próximos desarrollos. \"No todo lo sagrado llega envuelto en certeza. A veces aparece, simplemente, y nos pide estar a la altura de su presencia.\" - Lama Dorje Norbu",
+    ],
+  },
+  {
+    slug: "nuevo-grupo-internacional-llega-al-monasterio",
+    img: "/images/news-2.jpg",
+    alt: "Grupo internacional llegando a las instalaciones del monasterio",
+    titulo: "Nuevo grupo internacional de retiro llega al monasterio",
+    fecha: "12 de junio de 2026",
+    ubicacion: "Valle de Nyima",
+    extracto:
+      "El Monasterio Shambala Norbu ha recibido a un nuevo grupo internacional en busca de silencio y transformación personal.",
+    contenido: [
+      "El Monasterio Shambala Norbu ha recibido esta semana a un nuevo grupo de practicantes internacionales procedentes de distintos puntos de Europa, en busca de silencio, claridad y transformación personal. Entre los asistentes se encuentran perfiles diversos que reflejan la amplitud del camino espiritual contemporáneo: desde profesionales en transición vital hasta parejas que desean revisar su vínculo en un entorno de recogimiento. Como es habitual, el retiro se desarrollará bajo la guía del Venerable Lama Dorje Norbu, combinando prácticas de meditación, silencio y acompañamiento individual.",
     ],
   },
 ]
