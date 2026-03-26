@@ -1,73 +1,97 @@
-const resenias = [
+import ReseniaDobleCapaCard, {
+  type ReseniaDobleCapa,
+} from "@/components/retiro/ReseniaDobleCapaCard"
+
+const resenias: ReseniaDobleCapa[] = [
   {
     id: 1,
-    nombre: "María García",
-    origen: "Madrid, España",
-    fecha: "Enero 2025",
-    estrellas: 5,
-    texto:
-      "Un lugar de transformación genuina. La enseñanza del Lama y la atmósfera del centro me permitieron conectar con una paz que no había sentido antes. Volveré sin duda.",
-    retiro: "Retiro de Meditación Shamatha",
+    nombre: "Marisa",
+    fotoPerfil: "/placeholder-user.jpg",
+    estrellasPublicas: 5,
+    estrellasOcultas: 8,
+    textoPublico:
+      "Creía que ya llegaba tarde a todo. Aquí me sentí vista sin tener que explicarme, y eso me cambió más de lo que esperaba.",
+    textoOculto:
+      "Lo que no digo es que me vine arriba cosa mala. O sea, yo allí con mis monjes, mis masajitos… y pensando: ‘¿y si no vuelvo?’. Porque en casa soy la de siempre, pero allí… allí era alguien. Y eso engancha más de lo que parece.",
   },
   {
     id: 2,
-    nombre: "Carlos Mendoza",
-    origen: "Buenos Aires, Argentina",
-    fecha: "Noviembre 2024",
-    estrellas: 5,
-    texto:
-      "El retiro de Dakini fue una experiencia que no tengo palabras para describir. La calidad de las enseñanzas, el entorno y la calidez de la comunidad son excepcionales.",
-    retiro: "Retiro Dakini",
+    nombre: "Ernesto",
+    fotoPerfil: "/placeholder-user.jpg",
+    estrellasPublicas: 5,
+    estrellasOcultas: 0,
+    textoPublico:
+      "Vine con escepticismo y salí con menos ruido mental. No fue cómodo todo el tiempo, pero sí honesto.",
+    textoOculto:
+      "Yo fui a desmontar el chiringuito y acabé jodido yo. Porque una cosa te digo: a mí no me molestaba el budismo… me molestaba que ella estuviera tan bien sin mí. Y eso no lo llevaba nada bien.",
   },
   {
     id: 3,
-    nombre: "Ana Ferreira",
-    origen: "Lisboa, Portugal",
-    fecha: "Octubre 2024",
-    estrellas: 5,
-    texto:
-      "Vine con el corazón cargado y me marché con una ligereza que aún mantengo meses después. Las prácticas diarias y la guía espiritual son de una profundidad extraordinaria.",
-    retiro: "Retiro de Fin de Semana",
+    nombre: "Pelayo",
+    fotoPerfil: "/placeholder-user.jpg",
+    estrellasPublicas: 5,
+    estrellasOcultas: 2,
+    textoPublico:
+      "Al principio iba perdidísimo con las prácticas, luego les cogí cariño. Me fui tranquilo y con ganas de volver.",
+    textoOculto:
+      "Yo estaba más pendiente de que me dejaran propina y de caer bien que de otra cosa. Traducía lo que sonaba bonito y ya. Hubo un momento que pensé: ‘no tengo ni idea de lo que está pasando aquí’, pero claro… tampoco lo iba a decir.",
   },
   {
     id: 4,
-    nombre: "Jordi Puig",
-    origen: "Barcelona, España",
-    fecha: "Septiembre 2024",
-    estrellas: 5,
-    texto:
-      "Ya llevo tres años visitando el centro y cada retiro es una nueva capa de comprensión. La tradición se transmite con pureza y rigor, y a la vez con una enorme accesibilidad.",
-    retiro: "Curso de Tibetano",
+    nombre: "Carla",
+    fotoPerfil: "/placeholder-user.jpg",
+    estrellasPublicas: 5,
+    estrellasOcultas: 2,
+    textoPublico:
+      "No me gustan los discursos vacíos y aquí no los encontré. Todo es bastante concreto y, para sorpresa mía, funciona.",
+    textoOculto:
+      "Había contenido por todos lados, una fantasía. Pero también te digo: cuando la cosa se puso rara de verdad, yo dejé de grabar. Porque ahí ya no sabía si estaba viviendo algo o explotándolo… y no me gustó mucho lo que vi.",
   },
   {
     id: 5,
-    nombre: "Sofía Ruiz",
-    origen: "Ciudad de México, México",
-    fecha: "Agosto 2024",
-    estrellas: 5,
-    texto:
-      "Nunca había estado en un retiro budista y me recibieron con una hospitalidad increíble. Las instrucciones son claras para principiantes y a la vez profundas para los más avanzados.",
-    retiro: "Introducción al Budismo",
+    nombre: "Luis",
+    fotoPerfil: "/placeholder-user.jpg",
+    estrellasPublicas: 5,
+    estrellasOcultas: 3,
+    textoPublico:
+      "No tuve grandes revelaciones, tuve algo mejor: claridad sostenida. Desde entonces vivo con menos prisa por entenderlo todo.",
+    textoOculto:
+      "Yo iba buscando fe o algo así… pero me pillé comparándome con los demás, a ver quién estaba ‘más iluminado’. Y pensé: ‘muy bien no debo estar si hasta aquí vengo a competir’.",
   },
   {
     id: 6,
-    nombre: "Tomás Iglesias",
-    origen: "Sevilla, España",
-    fecha: "Julio 2024",
-    estrellas: 5,
-    texto:
-      "El silencio del lugar, la belleza de las prácticas y la sabiduría del Lama se combinan para crear algo difícil de encontrar en el mundo moderno. Un tesoro.",
-    retiro: "Retiro de Verano",
+    nombre: "Rebeca y Alba",
+    fotoPerfil: "/placeholder-user.jpg",
+    estrellasPublicas: 5,
+    estrellasOcultas: 3,
+    textoPublico:
+      "Vinimos juntas por probar y acabamos agradeciendo cada día. Hubo risas, silencios raros y mucha verdad.",
+    textoOculto:
+      "Nos reímos mucho, sí… pero también evitamos hablar de nosotras de verdad. Porque una cosa es venir de viaje espiritual y otra ya decir en voz alta lo que nos pasa. Y ahí… nos callamos bastante.",
+  },
+  {
+    id: 7,
+    nombre: "María y Pablo",
+    fotoPerfil: "/placeholder-user.jpg",
+    estrellasPublicas: 5,
+    estrellasOcultas: 2,
+    textoPublico:
+      "Compartir el silencio nos acercó de una forma muy simple. Salimos más atentos el uno al otro.",
+    textoOculto:
+      "Allí todo era súper bonito, sí… pero también porque no había vida real. Ni curro, ni facturas, ni nada. A ver cómo de unidos estamos cuando volvamos a casa y nos toque lo de siempre.",
+  },
+  {
+    id: 8,
+    nombre: "Oliver",
+    fotoPerfil: "/placeholder-user.jpg",
+    estrellasPublicas: 5,
+    estrellasOcultas: 2,
+    textoPublico:
+      "El retiro está muy bien llevado y no necesita adornos. Te coloca frente a ti mismo, y eso ya es mucho.",
+    textoOculto:
+      "Yo ese rollo me lo sé: cómo hablar, cómo sentarme, cómo parecer presente… todo. Pero hubo un momento que pensé: ‘vale, muy bien el personaje… ¿pero yo dónde estoy aquí?’ Y eso ya no me hizo tanta gracia.",
   },
 ]
-
-function StarIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="#A72F27" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M7 1L8.545 5.09H13L9.5 7.6L10.91 12L7 9.32L3.09 12L4.5 7.6L1 5.09H5.455L7 1Z" />
-    </svg>
-  )
-}
 
 export default function Resenias() {
   return (
@@ -85,35 +109,8 @@ export default function Resenias() {
 
       {/* Cards */}
       <div className="flex flex-col gap-4 max-w-md mx-auto">
-        {resenias.map((r) => (
-          <article
-            key={r.id}
-            className="bg-[#FBF3DC] rounded-xl p-5 flex flex-col gap-3"
-          >
-            {/* Stars */}
-            <div className="flex gap-0.5" aria-label={`${r.estrellas} de 5 estrellas`}>
-              {Array.from({ length: r.estrellas }).map((_, i) => (
-                <StarIcon key={i} />
-              ))}
-            </div>
-
-            {/* Quote */}
-            <blockquote className="font-serif text-[15px] text-[#5E2A29] leading-relaxed">
-              &ldquo;{r.texto}&rdquo;
-            </blockquote>
-
-            {/* Meta */}
-            <div className="flex items-end justify-between gap-2 pt-1 border-t border-[#E8D8C4]">
-              <div>
-                <p className="font-sans text-[13px] font-semibold text-[#5E2A29]">{r.nombre}</p>
-                <p className="font-sans text-[11px] text-[#724E48]">{r.origen}</p>
-              </div>
-              <div className="text-right">
-                <p className="font-sans text-[11px] text-[#A72F27] italic">{r.retiro}</p>
-                <p className="font-sans text-[10px] text-[#724E48]">{r.fecha}</p>
-              </div>
-            </div>
-          </article>
+        {resenias.map((resenia) => (
+          <ReseniaDobleCapaCard key={resenia.id} resenia={resenia} />
         ))}
       </div>
     </section>
