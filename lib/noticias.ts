@@ -14,7 +14,7 @@ export type Noticia = {
 export const noticias: Noticia[] = [
   {
     slug: "despertar-proceso-colectivo",
-    img: "/images/news-1.jpg",
+    img: "/images/noticia5.jpeg",
     alt: "Participantes compartiendo su experiencia al cierre del retiro",
     titulo: "Experiencia compartida: el despertar como proceso colectivo",
     fecha: "22 de junio de 2026",
@@ -27,7 +27,7 @@ export const noticias: Noticia[] = [
   },
   {
     slug: "afluencia-inesperada-de-visitantes",
-    img: "/images/news-2.jpg",
+    img: "/images/noticia4.jpeg",
     alt: "Visitantes llegando al monasterio durante las jornadas abiertas",
     titulo: "Afluencia inesperada de visitantes tras los últimos acontecimientos",
     fecha: "19 de junio de 2026",
@@ -40,7 +40,7 @@ export const noticias: Noticia[] = [
   },
   {
     slug: "practicas-intensivas-de-purificacion",
-    img: "/images/news-1.jpg",
+    img: "/images/noticia3.jpeg",
     alt: "Sesión individual de acompañamiento durante el retiro",
     titulo: "Un participante es sometido a prácticas intensivas de purificación",
     fecha: "18 de junio de 2026",
@@ -54,7 +54,7 @@ export const noticias: Noticia[] = [
   },
   {
     slug: "posible-manifestacion-de-la-dakini",
-    img: "/images/news-3.jpg",
+    img: "/images/noticia2.jpeg",
     alt: "Comunidad reunida en el templo principal durante un comunicado",
     titulo: "Posible manifestación de la dakini en Shambala Norbu",
     fecha: "17 de junio de 2026",
@@ -69,7 +69,7 @@ export const noticias: Noticia[] = [
   },
   {
     slug: "nuevo-grupo-internacional-llega-al-monasterio",
-    img: "/images/news-2.jpg",
+    img: "/images/noticia1.jpeg",
     alt: "Grupo internacional llegando a las instalaciones del monasterio",
     titulo: "Nuevo grupo internacional de retiro llega al monasterio",
     fecha: "12 de junio de 2026",
