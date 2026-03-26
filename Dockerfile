@@ -16,6 +16,9 @@ RUN corepack prepare pnpm@9.15.9 --activate \
 FROM base AS builder
 WORKDIR /app
 
+ARG NEXT_PUBLIC_MAPS_API_KEY
+ENV NEXT_PUBLIC_MAPS_API_KEY=$NEXT_PUBLIC_MAPS_API_KEY
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 

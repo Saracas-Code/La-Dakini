@@ -1,11 +1,69 @@
 "use client"
 
-import { useState } from "react"
-import { MapPin, Phone, Mail, Clock } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+import { Clock, Mail, Phone } from "lucide-react"
+
+declare global {
+  interface Window {
+    google?: any
+    __googleMapsScriptLoading?: Promise<void>
+  }
+}
+
+const MAP_CENTER = { lat: 32.65, lng: 80.30 }
+const MAPS_LINK = "https://www.google.com/maps?q=32.65,80.30"
+
+function loadGoogleMapsScript(apiKey: string): Promise<void> {
+  if (typeof window === "undefined") return Promise.resolve()
+  if (window.google?.maps) return Promise.resolve()
+  if (window.__googleMapsScriptLoading) return window.__googleMapsScriptLoading
+
+  window.__googleMapsScriptLoading = new Promise((resolve, reject) => {
+    const existingScript = document.querySelector<HTMLScriptElement>(
+      "script[data-google-maps='true']",
+    )
+
+    if (existingScript) {
+      if (window.google?.maps) {
+        resolve()
+        return
+      }
+
+      existingScript.addEventListener("load", () => resolve(), { once: true })
+      existingScript.addEventListener(
+        "error",
+        () => reject(new Error("No se pudo cargar Google Maps")),
+        { once: true },
+      )
+      return
+    }
+
+    const script = document.createElement("script")
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}`
+    script.async = true
+    script.defer = true
+    script.dataset.googleMaps = "true"
+    script.addEventListener("load", () => resolve(), { once: true })
+    script.addEventListener(
+      "error",
+      () => reject(new Error("No se pudo cargar Google Maps")),
+      { once: true },
+    )
+    document.body.appendChild(script)
+  })
+
+  return window.__googleMapsScriptLoading
+}
 
 export default function Contacto() {
   const [form, setForm] = useState({ nombre: "", correo: "", mensaje: "" })
   const [enviado, setEnviado] = useState(false)
+  const [mapLoading, setMapLoading] = useState(true)
+  const [mapError, setMapError] = useState(false)
+
+  const mapRef = useRef<HTMLDivElement | null>(null)
+  const mapInstanceRef = useRef<any>(null)
+  const markerListenerRef = useRef<any>(null)
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -15,6 +73,88 @@ export default function Contacto() {
     e.preventDefault()
     setEnviado(true)
   }
+
+  useEffect(() => {
+    let cancelled = false
+
+    const initMap = () => {
+      if (!mapRef.current || !window.google?.maps || mapInstanceRef.current) return
+
+      const map = new window.google.maps.Map(mapRef.current, {
+        center: MAP_CENTER,
+        zoom: 8,
+        draggable: true,
+        scrollwheel: true,
+        disableDoubleClickZoom: false,
+        gestureHandling: "greedy",
+        mapTypeControl: false,
+        streetViewControl: false,
+        fullscreenControl: false,
+      })
+
+      const marker = new window.google.maps.Marker({
+        position: MAP_CENTER,
+        map,
+        title: "Monasterio Shambala Norbu",
+      })
+
+      markerListenerRef.current = marker.addListener("click", () => {
+        window.open(MAPS_LINK, "_blank", "noopener,noreferrer")
+      })
+
+      mapInstanceRef.current = map
+
+      if (!cancelled) {
+        setMapError(false)
+        setMapLoading(false)
+      }
+    }
+
+    async function setupMap() {
+      const apiKey = process.env.NEXT_PUBLIC_MAPS_API_KEY
+
+      if (!apiKey) {
+        if (!cancelled) {
+          setMapError(true)
+          setMapLoading(false)
+        }
+        return
+      }
+
+      try {
+        if (window.google?.maps) {
+          initMap()
+          return
+        }
+
+        await loadGoogleMapsScript(apiKey)
+
+        if (cancelled) return
+
+        initMap()
+
+        if (!mapInstanceRef.current) {
+          setMapError(true)
+          setMapLoading(false)
+        }
+      } catch (error) {
+        console.error("Error al cargar o inicializar Google Maps:", error)
+        if (!cancelled) {
+          setMapError(true)
+          setMapLoading(false)
+        }
+      }
+    }
+
+    setupMap()
+
+    return () => {
+      cancelled = true
+      if (markerListenerRef.current && window.google?.maps?.event) {
+        window.google.maps.event.removeListener(markerListenerRef.current)
+      }
+    }
+  }, [])
 
   return (
     <section
@@ -102,53 +242,47 @@ export default function Contacto() {
           </form>
         )}
 
-        {/* Map placeholder */}
-        <div className="relative rounded-lg overflow-hidden mb-8 border border-[#E8D8C4]">
-          <div className="bg-[#E8D8C4] h-44 flex items-center justify-center">
-            <div className="text-center">
-              <MapPin className="mx-auto mb-2 text-[#A72F27]" size={28} />
-              <span className="font-sans text-[#724E48] text-sm">Centro Dharma Karuna</span>
+        {/* Embedded Google Map */}
+        <div className="relative mb-3 overflow-hidden rounded-xl border border-[#E8D8C4] shadow-sm">
+          <div
+            ref={mapRef}
+            className="h-[350px] w-full sm:h-[380px] bg-[#F3E8D3]"
+          />
+
+          {mapLoading && !mapError && (
+            <div className="absolute inset-0 flex items-center justify-center bg-[#FBF3DC]/70 backdrop-blur-[1px]">
+              <p className="font-sans text-[0.78rem] tracking-[0.08em] uppercase text-[#724E48]">
+                Cargando ubicación...
+              </p>
             </div>
-          </div>
-          {/* Stylized map overlay */}
-          <div className="absolute inset-0 pointer-events-none">
-            {[...Array(6)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute border border-[#724E48]/10"
-                style={{
-                  top: `${i * 18}%`,
-                  left: 0,
-                  right: 0,
-                  height: "1px",
-                }}
-              />
-            ))}
-            {[...Array(8)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute border border-[#724E48]/10"
-                style={{
-                  left: `${i * 15}%`,
-                  top: 0,
-                  bottom: 0,
-                  width: "1px",
-                }}
-              />
-            ))}
-          </div>
+          )}
+
+          {mapError && (
+            <div className="absolute inset-0 flex items-center justify-center bg-[#F3E8D3]">
+              <a
+                href={MAPS_LINK}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center rounded-md border border-[#A72F27]/30 bg-[#FFFFFF] px-4 py-2 font-sans text-[0.72rem] tracking-[0.12em] uppercase text-[#A72F27] hover:bg-[#FDF7EA] transition-colors"
+              >
+                VER UBICACIÓN
+              </a>
+            </div>
+          )}
+        </div>
+
+        <div className="mb-8">
+          <p className="font-sans text-[0.8rem] leading-relaxed text-[#724E48]">
+            Valle de Nyima, Prefectura de Ngari (Ali), Altiplano Tibetano
+          </p>
         </div>
 
         {/* Contact details */}
         <div className="flex flex-col gap-4">
           {[
             {
-              icon: <MapPin size={16} className="shrink-0 mt-0.5" />,
-              text: "Calle del Dharma 12, Valle de la Paz, 08400 Barcelona, España",
-            },
-            {
               icon: <Phone size={16} className="shrink-0" />,
-              text: "+34 93 123 45 67",
+              text: "+86 897 245 18 62",
             },
             {
               icon: <Mail size={16} className="shrink-0" />,
@@ -156,7 +290,7 @@ export default function Contacto() {
             },
             {
               icon: <Clock size={16} className="shrink-0" />,
-              text: "Lun–Vie: 9:00 – 18:00 · Fines de semana: retiros",
+              text: "Horario de visita: Lun-Dom · 9:00 – 17:30",
             },
           ].map((item, i) => (
             <div key={i} className="flex items-start gap-3 text-[#5E2A29]">
