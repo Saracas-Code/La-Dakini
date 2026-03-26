@@ -4,6 +4,11 @@ import Link from "next/link"
 import { noticias } from "@/lib/noticias"
 
 export default function Actualidad() {
+  const noticiaDestacada = noticias.find((noticia) => noticia.destacada)
+  const noticiasListado = noticiaDestacada
+    ? noticias.filter((noticia) => noticia.slug !== noticiaDestacada.slug)
+    : noticias
+
   return (
     <section
       id="actualidad"
@@ -23,8 +28,42 @@ export default function Actualidad() {
         </h2>
         <div className="w-8 h-[2px] bg-[#A72F27] mb-8" aria-hidden="true" />
 
+        {noticiaDestacada && (
+          <article className="mb-6 bg-[#FFFFFF] rounded-xl overflow-hidden shadow-sm border border-[#E8D8C4]">
+            <div className="relative h-44">
+              <Image
+                src={noticiaDestacada.img}
+                alt={noticiaDestacada.alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 640px"
+              />
+            </div>
+            <div className="p-5">
+              <span className="inline-flex items-center rounded-full bg-[#A72F27]/10 px-2.5 py-1 font-sans text-[0.62rem] tracking-[0.12em] uppercase text-[#A72F27]">
+                {noticiaDestacada.tipo ?? "Destacado"}
+              </span>
+              <time className="mt-3 block font-sans text-[10px] text-[#A72F27] tracking-wider uppercase">
+                {noticiaDestacada.fecha}
+              </time>
+              <h3 className="mt-2 font-serif text-[#5E2A29] text-[1.08rem] font-semibold leading-snug">
+                {noticiaDestacada.titulo}
+              </h3>
+              <p className="mt-2 font-sans text-[#724E48] text-[0.84rem] leading-relaxed">
+                {noticiaDestacada.extracto}
+              </p>
+              <Link
+                href={`/noticias/${noticiaDestacada.slug}`}
+                className="mt-3 inline-flex w-fit items-center text-[0.72rem] font-sans tracking-[0.15em] uppercase text-[#A72F27] underline underline-offset-2 hover:text-[#8B2520] transition-colors"
+              >
+                Leer más
+              </Link>
+            </div>
+          </article>
+        )}
+
         <ul className="flex flex-col gap-5">
-          {noticias.map((noticia) => (
+          {noticiasListado.map((noticia) => (
             <li key={noticia.slug}>
               <article className="flex gap-4 bg-[#FFFFFF] rounded-lg overflow-hidden shadow-sm border border-[#E8D8C4]">
                 {/* Thumbnail */}
