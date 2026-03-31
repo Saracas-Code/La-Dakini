@@ -8,88 +8,110 @@ const resenias: ReseniaDobleCapa[] = [
     nombre: "Marisa",
     fotoPerfil: "/placeholder-user.jpg",
     estrellasPublicas: 5,
-    estrellasOcultas: 8,
+    estrellasOcultas: 10,
     textoPublico:
-      "Creía que ya llegaba tarde a todo. Aquí me sentí vista sin tener que explicarme, y eso me cambió más de lo que esperaba.",
+      "Muy recomendable. Te cuidan mejor que en casa.",
     textoOculto:
-      "Lo que no digo es que me vine arriba cosa mala. O sea, yo allí con mis monjes, mis masajitos… y pensando: ‘¿y si no vuelvo?’. Porque en casa soy la de siempre, pero allí… allí era alguien. Y eso engancha más de lo que parece.",
+      "Verás que ahora soy mundialmente famosa.",
   },
   {
     id: 2,
     nombre: "Ernesto",
     fotoPerfil: "/placeholder-user.jpg",
-    estrellasPublicas: 5,
+    estrellasPublicas: 3,
     estrellasOcultas: 0,
     textoPublico:
-      "Vine con escepticismo y salí con menos ruido mental. No fue cómodo todo el tiempo, pero sí honesto.",
+      "Una experiencia… inolvidable.",
     textoOculto:
-      "Yo fui a desmontar el chiringuito y acabé jodido yo. Porque una cosa te digo: a mí no me molestaba el budismo… me molestaba que ella estuviera tan bien sin mí. Y eso no lo llevaba nada bien.",
+      "Irse todos a la mierda.",
   },
   {
     id: 3,
     nombre: "Pelayo",
     fotoPerfil: "/placeholder-user.jpg",
     estrellasPublicas: 5,
-    estrellasOcultas: 2,
+    estrellasOcultas: 3,
     textoPublico:
-      "Al principio iba perdidísimo con las prácticas, luego les cogí cariño. Me fui tranquilo y con ganas de volver.",
+      "Un espacio dónde todos nos entendemos, como si tiene que ser por señas. ¡Amo mi trabajo! ¡Amo el retiro!",
     textoOculto:
-      "Yo estaba más pendiente de que me dejaran propina y de caer bien que de otra cosa. Traducía lo que sonaba bonito y ya. Hubo un momento que pensé: ‘no tengo ni idea de lo que está pasando aquí’, pero claro… tampoco lo iba a decir.",
+      "Yo me saqué un B1 de chino mandarín por una web baratísima y me encuentro con que aquí se habla en tibetano y en tontería mística. Aquí la gente habla de energía, de vibración, de soltar… y yo asiento todo el rato como si lo pillara. Ayer traduje ‘abre tu canal interno’ como ‘tienes que ir más al baño’, que no sé si tiene algo que ver, pero coló. Aun así, sitio precioso, ambiente increíble y gente muy maja, que siempre ayuda. Estoy bien. Creo.",
   },
   {
     id: 4,
     nombre: "Carla",
     fotoPerfil: "/placeholder-user.jpg",
     estrellasPublicas: 5,
-    estrellasOcultas: 2,
+    estrellasOcultas: 4,
     textoPublico:
-      "No me gustan los discursos vacíos y aquí no los encontré. Todo es bastante concreto y, para sorpresa mía, funciona.",
+      "Un lugar mágico para reconectar y volver renovada. Me noto hasta el cutis más depurado.",
     textoOculto:
-      "Había contenido por todos lados, una fantasía. Pero también te digo: cuando la cosa se puso rara de verdad, yo dejé de grabar. Porque ahí ya no sabía si estaba viviendo algo o explotándolo… y no me gustó mucho lo que vi.",
+      "No sabéis lo guay que me hubiese quedado el vlog para youtube si esta gente me hubiese dejado sacar el móvil más. Esto es contenido puro. O sea, hay momentos aquí que si no los grabas es un crimen. La luz, los monjes, la señora esa que ahora es como una diosa manchega… es que es perfecto. También os digo: hay mucho loco espiritual, pero del interesante, del que te da engagement. Yo os voy grabando todo de estrangis, porque por mis followers lo que sea. OS SUPER AMO.",
   },
   {
     id: 5,
     nombre: "Luis",
     fotoPerfil: "/placeholder-user.jpg",
-    estrellasPublicas: 5,
-    estrellasOcultas: 3,
+    estrellasPublicas: 4,
+    estrellasOcultas: 5,
     textoPublico:
-      "No tuve grandes revelaciones, tuve algo mejor: claridad sostenida. Desde entonces vivo con menos prisa por entenderlo todo.",
+      "Puede que este lugar sea mi último recurso para mi salvación.",
     textoOculto:
-      "Yo iba buscando fe o algo así… pero me pillé comparándome con los demás, a ver quién estaba ‘más iluminado’. Y pensé: ‘muy bien no debo estar si hasta aquí vengo a competir’.",
+      "Hay momentos en la vida en los que pierdes el rumbo y el sentido de tu vida. Que necesitas deconstruirte para volver más fuerte y yo necesitaba salir de mi zona de confort para salir de este agujero negro. He conocido a una mujer llamada Marisa con una sabiduría excepcional y que me entiende… No sé si he recuperado la fe, pero al menos ya no me da tanta vergüenza no tenerla.",
   },
   {
     id: 6,
-    nombre: "Rebeca y Alba",
+    nombre: "Rebeca",
+    fotoPerfil: "/placeholder-user.jpg",
+    estrellasPublicas: 5,
+    estrellasOcultas: 5,
+    textoPublico:
+      "Estoy descubriendo lo que es la meditación y me flipa!",
+    textoOculto:
+      "Yo venía con expectativas muy concretas y ninguna incluía encontrarme a mí misma, pero oye… ha pasado. Aquí no hay bares, no hay hombres con pelo y aún así te acabas poniendo cachonda emocionalmente, que es peor. Mucho tiempo para pensar, mucho silencio… y Alba mirándome raro. No sé. Algo se ha movido. Y no ha sido solo la energía.",
+  },
+  {
+    id: 7,
+    nombre: "Alba",
     fotoPerfil: "/placeholder-user.jpg",
     estrellasPublicas: 5,
     estrellasOcultas: 3,
     textoPublico:
-      "Vinimos juntas por probar y acabamos agradeciendo cada día. Hubo risas, silencios raros y mucha verdad.",
+      "Un viaje hacia dentro… aunque dé miedo",
     textoOculto:
-      "Nos reímos mucho, sí… pero también evitamos hablar de nosotras de verdad. Porque una cosa es venir de viaje espiritual y otra ya decir en voz alta lo que nos pasa. Y ahí… nos callamos bastante.",
-  },
-  {
-    id: 7,
-    nombre: "María y Pablo",
-    fotoPerfil: "/placeholder-user.jpg",
-    estrellasPublicas: 5,
-    estrellasOcultas: 2,
-    textoPublico:
-      "Compartir el silencio nos acercó de una forma muy simple. Salimos más atentos el uno al otro.",
-    textoOculto:
-      "Allí todo era súper bonito, sí… pero también porque no había vida real. Ni curro, ni facturas, ni nada. A ver cómo de unidos estamos cuando volvamos a casa y nos toque lo de siempre.",
+      "A la mierda con todo. ¡Yo ya no quiero más hombres, yo la quiero a ella y de esta no se me va a escapar!",
   },
   {
     id: 8,
-    nombre: "Oliver",
+    nombre: "María",
     fotoPerfil: "/placeholder-user.jpg",
     estrellasPublicas: 5,
-    estrellasOcultas: 2,
+    estrellasOcultas: 7,
     textoPublico:
-      "El retiro está muy bien llevado y no necesita adornos. Te coloca frente a ti mismo, y eso ya es mucho.",
+      "Mejor que la luna de miel!",
     textoOculto:
-      "Yo ese rollo me lo sé: cómo hablar, cómo sentarme, cómo parecer presente… todo. Pero hubo un momento que pensé: ‘vale, muy bien el personaje… ¿pero yo dónde estoy aquí?’ Y eso ya no me hizo tanta gracia.",
+      "QUE LE QUIERO, LE QUIERO, LE QUIERO Y QUIERO GRITARLO POR TODO EL TIBET!!!!! ES EL HOMBRE DE MI VIDAAAA!! Tengo una sorpresita que le va a hacer super feliz. ",
+  },
+  {
+    id: 9,
+    nombre: "Pablo",
+    fotoPerfil: "/placeholder-user.jpg",
+    estrellasPublicas: 5,
+    estrellasOcultas: 4,
+    textoPublico:
+      "Muy recomendable para reconectar con lo esencial.",
+    textoOculto:
+      "María está mega feliz… pero igual estaría bien tener alguna clasecilla por separado… Aún así el retiro genial y nosotros genial también. Todo genial.",
+  },
+  {
+    id: 10,
+    nombre: "Oliver",
+    fotoPerfil: "/placeholder-user.jpg",
+    estrellasPublicas: 4,
+    estrellasOcultas: 5,
+    textoPublico:
+      "Un entorno perfecto para expandir tu conocimiento y abrir tu mente. Buenas clases de yoga.",
+    textoOculto:
+      "Esto no es un retiro, esto es un portal. Aquí se está moviendo una energía muy concreta, muy elevada, muy sensual incluso. Yo ya venía trabajado de casa, pero aquí he encontrado un nivel de apertura bastante interesante. Hay personas con mucho potencial, otras más cerradas… y alguna que otra que está claramente lista para evolucionar conmigo. No voy a señalar, pero se sabe.",
   },
 ]
 
