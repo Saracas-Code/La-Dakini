@@ -85,7 +85,7 @@ export default function ReseniaDobleCapaCard({
         overflowColor="#E3A436"
       />
 
-      <blockquote className="font-serif text-[15px] text-[#5E2A29] leading-relaxed">
+      <blockquote className="font-sans text-[15px] text-[#5E2A29] leading-relaxed">
         &ldquo;{resenia.textoPublico}&rdquo;
       </blockquote>
 

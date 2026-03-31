@@ -1,19 +1,20 @@
 import type { Metadata } from 'next'
-import { Inter, Source_Serif_4 } from 'next/font/google'
+import { Cinzel_Decorative, Montserrat } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const inter = Inter({
+const montserrat = Montserrat({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
+  weight: ['400', '500', '600', '700'],
 })
 
-const sourceSerif = Source_Serif_4({
+const cinzelDecorative = Cinzel_Decorative({
   subsets: ['latin'],
   variable: '--font-serif',
   display: 'swap',
-  weight: ['300', '400', '600', '700'],
+  weight: ['400', '700'],
 })
 
 export const metadata: Metadata = {
@@ -33,7 +34,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" className={`${inter.variable} ${sourceSerif.variable}`}>
+    <html
+      lang="es"
+      className={`${montserrat.variable} ${cinzelDecorative.variable}`}
+    >
       <body className="font-sans antialiased bg-background text-foreground">
         {children}
         <Analytics />
