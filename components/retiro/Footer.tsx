@@ -5,10 +5,9 @@ const footerLinks = [
   { href: "/#nosotros", label: "Nosotros" },
   { href: "/#lama", label: "Lama" },
   { href: "/#dakini", label: "Dakini" },
-  { href: "/#galeria", label: "Galería" },
   { href: "/#actualidad", label: "Actualidad" },
   { href: "/#servicios", label: "Servicios" },
-  { href: "/#contacto", label: "Contacto" },
+  { href: "/#resenias", label: "Reseñas" },
 ]
 
 export default function Footer() {
