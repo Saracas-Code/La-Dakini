@@ -35,10 +35,10 @@ export default function Hero() {
         </p>
 
         <a
-          href="#contacto"
+          href="#servicios"
           className="mt-2 inline-block bg-[#A72F27] text-white font-sans text-sm tracking-widest uppercase px-8 py-4 rounded-md shadow-lg hover:bg-[#8B2520] active:scale-95 transition-all"
         >
-          Reservar mi retiro
+          Explorar servicios
         </a>
 
         <div className="w-12 h-px bg-[#FBF3DC]/60" aria-hidden="true" />

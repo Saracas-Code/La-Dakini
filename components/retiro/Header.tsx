@@ -9,7 +9,6 @@ const navLinks = [
   { href: "/#nosotros", label: "Nosotros" },
   { href: "/#lama", label: "Nuestro Lama" },
   { href: "/#dakini", label: "La Dakini" },
-  { href: "/#galeria", label: "Galería" },
   { href: "/#actualidad", label: "Actualidad" },
   { href: "/#servicios", label: "Servicios" },
   { href: "/#resenias", label: "Reseñas" },
@@ -68,11 +67,11 @@ export default function Header() {
           </nav>
           <div className="mt-auto pb-10">
             <Link
-              href="/#contacto"
+              href="/#servicios"
               onClick={() => setMenuOpen(false)}
               className="block w-full text-center bg-[#A72F27] text-white font-sans text-sm tracking-widest uppercase py-4 rounded-md hover:bg-[#8B2520] transition-colors"
             >
-              Reservar estancia
+              Explorar servicios
             </Link>
           </div>
         </div>
