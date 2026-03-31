@@ -62,105 +62,107 @@ export default async function ServicioDetallePage({
       <Header />
 
       <main className="bg-[#FBF3DC] px-6 pt-20 pb-16">
-        <article className="mx-auto max-w-3xl overflow-hidden rounded-xl border border-[#E8D8C4] bg-[#FFFFFF] shadow-sm">
-          <div className="relative h-56 sm:h-72">
-            <Image
-              src={servicio.img}
-              alt={servicio.alt}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 768px"
-              priority
-            />
-          </div>
+        <div className="mx-auto max-w-3xl">
+          <Link
+            href="/#servicios"
+            className="mb-4 inline-flex items-center text-[0.72rem] font-sans tracking-[0.15em] uppercase text-[#A72F27] underline underline-offset-2 transition-colors hover:text-[#8B2520]"
+          >
+            ← Volver
+          </Link>
 
-          <div className="p-6 sm:p-8">
-            <Link
-              href="/#servicios"
-              className="inline-flex items-center text-[0.72rem] font-sans tracking-[0.15em] uppercase text-[#A72F27] underline underline-offset-2 transition-colors hover:text-[#8B2520]"
-            >
-              ← Volver
-            </Link>
-
-            <p className="mt-4 font-sans text-[10px] tracking-wider uppercase text-[#A72F27]">
-              {servicio.etiqueta}
-            </p>
-            <p className="mt-2 font-sans text-[0.7rem] tracking-[0.12em] uppercase text-[#724E48]">
-              {servicio.categoria}
-            </p>
-
-            <h1 className="mt-2 font-serif text-2xl font-semibold leading-tight text-[#5E2A29] sm:text-3xl">
-              {servicio.titulo}
-            </h1>
-
-            <div className="mt-5 h-[2px] w-10 bg-[#A72F27]" aria-hidden="true" />
-
-            <div className="mt-6 space-y-4">
-              {servicio.introduccion.map((parrafo, index) => (
-                <p
-                  key={`${servicio.slug}-introduccion-${index}`}
-                  className="font-sans text-[0.95rem] leading-relaxed text-[#724E48]"
-                >
-                  {parrafo}
-                </p>
-              ))}
+          <article className="overflow-hidden rounded-xl border border-[#E8D8C4] bg-[#FFFFFF] shadow-sm">
+            <div className="relative h-56 sm:h-72">
+              <Image
+                src={servicio.img}
+                alt={servicio.alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 768px"
+                priority
+              />
             </div>
 
-            <section className="mt-8">
-              <h2 className="font-serif text-[1.15rem] font-semibold text-[#5E2A29]">
-                Indicado para participantes con:
-              </h2>
-              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-                {servicio.indicaciones.map((indicacion) => (
-                  <li
-                    key={indicacion}
-                    className="flex items-start gap-3 rounded-2xl border border-[#E8D8C4] bg-[#FBF3DC] px-4 py-3 font-sans text-[0.88rem] leading-7 text-[#5E2A29]"
-                  >
-                    <span
-                      className="mt-[0.68rem] h-1.5 w-1.5 rounded-full bg-[#A72F27]"
-                      aria-hidden="true"
-                    />
-                    <span>{indicacion}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
+            <div className="p-6 sm:p-8">
+              <p className="font-sans text-[10px] tracking-wider uppercase text-[#A72F27]">
+                {servicio.etiqueta}
+              </p>
+              <p className="mt-2 font-sans text-[0.7rem] tracking-[0.12em] uppercase text-[#724E48]">
+                {servicio.categoria}
+              </p>
 
-            <section className="mt-8">
-              <h2 className="font-serif text-[1.15rem] font-semibold text-[#5E2A29]">
-                Según el caso, el proceso puede incluir:
-              </h2>
-              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-                {servicio.protocolos.map((protocolo) => (
-                  <li
-                    key={protocolo}
-                    className="rounded-2xl border border-[#E8D8C4] bg-[#FFFFFF] px-4 py-3 font-sans text-[0.88rem] leading-7 text-[#724E48]"
-                  >
-                    {protocolo}
-                  </li>
-                ))}
-              </ul>
-            </section>
+              <h1 className="mt-2 font-serif text-2xl font-semibold leading-tight text-[#5E2A29] sm:text-3xl">
+                {servicio.titulo}
+              </h1>
 
-            <div className="mt-8">
-              <section className="rounded-[1.45rem] border border-[#5E2A29] bg-[#5E2A29] p-5 shadow-sm">
-                <p className="font-sans text-[0.7rem] tracking-[0.16em] uppercase text-[#FBF3DC]">
-                  Importante
-                </p>
-                <p className="mt-3 font-sans text-[0.9rem] leading-7 text-[#FBF3DC]/90">
-                  {servicio.importante}
-                </p>
+              <div className="mt-5 h-[2px] w-10 bg-[#A72F27]" aria-hidden="true" />
+
+              <div className="mt-6 space-y-4">
+                {servicio.introduccion.map((parrafo, index) => (
+                  <p
+                    key={`${servicio.slug}-introduccion-${index}`}
+                    className="font-sans text-[0.95rem] leading-relaxed text-[#724E48]"
+                  >
+                    {parrafo}
+                  </p>
+                ))}
+              </div>
+
+              <section className="mt-8">
+                <h2 className="font-serif text-[1.15rem] font-semibold text-[#5E2A29]">
+                  Indicado para participantes con:
+                </h2>
+                <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {servicio.indicaciones.map((indicacion) => (
+                    <li
+                      key={indicacion}
+                      className="flex items-start gap-3 rounded-2xl border border-[#E8D8C4] bg-[#FBF3DC] px-4 py-3 font-sans text-[0.88rem] leading-7 text-[#5E2A29]"
+                    >
+                      <span
+                        className="mt-[0.68rem] h-1.5 w-1.5 rounded-full bg-[#A72F27]"
+                        aria-hidden="true"
+                      />
+                      <span>{indicacion}</span>
+                    </li>
+                  ))}
+                </ul>
               </section>
 
-              <p className="mt-6 border-t border-[#E8D8C4] pt-5 font-serif text-[0.71rem] italic leading-6 text-[#724E48]">
-                <span className="font-semibold text-[#5E2A29] not-italic">
-                  Nota para participantes:
-                </span>{" "}
-                {servicio.nota}
-              </p>
+              <section className="mt-8">
+                <h2 className="font-serif text-[1.15rem] font-semibold text-[#5E2A29]">
+                  Según el caso, el proceso puede incluir:
+                </h2>
+                <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {servicio.protocolos.map((protocolo) => (
+                    <li
+                      key={protocolo}
+                      className="rounded-2xl border border-[#E8D8C4] bg-[#FFFFFF] px-4 py-3 font-sans text-[0.88rem] leading-7 text-[#724E48]"
+                    >
+                      {protocolo}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              <div className="mt-8">
+                <section className="rounded-[1.45rem] border border-[#5E2A29] bg-[#5E2A29] p-5 shadow-sm">
+                  <p className="font-sans text-[0.7rem] tracking-[0.16em] uppercase text-[#FBF3DC]">
+                    Importante
+                  </p>
+                  <p className="mt-3 font-sans text-[0.9rem] leading-7 text-[#FBF3DC]/90">
+                    {servicio.importante}
+                  </p>
+                </section>
+
+                <p className="mt-6 border-t border-[#E8D8C4] pt-5 font-serif text-[0.71rem] italic leading-6 text-[#724E48]">
+                  <span className="font-semibold text-[#5E2A29] not-italic">
+                    Nota para participantes:
+                  </span>{" "}
+                  {servicio.nota}
+                </p>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
+        </div>
 
         {(servicioAnterior || servicioSiguiente) && (
           <nav

@@ -57,55 +57,57 @@ export default async function NoticiaDetallePage({ params }: DetailPageProps) {
       <Header />
 
       <main className="bg-[#FBF3DC] px-6 pt-20 pb-16">
-        <article className="max-w-3xl mx-auto rounded-xl border border-[#E8D8C4] bg-[#FFFFFF] shadow-sm overflow-hidden">
-          <div className="relative h-56 sm:h-72">
-            <Image
-              src={noticia.img}
-              alt={noticia.alt}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 768px"
-              priority
-            />
-          </div>
+        <div className="max-w-3xl mx-auto">
+          <Link
+            href="/#actualidad"
+            className="mb-4 inline-flex items-center text-[0.72rem] font-sans tracking-[0.15em] uppercase text-[#A72F27] underline underline-offset-2 transition-colors hover:text-[#8B2520]"
+          >
+            ← Volver
+          </Link>
 
-          <div className="p-6 sm:p-8">
-            <Link
-              href="/#actualidad"
-              className="inline-flex items-center text-[0.72rem] font-sans tracking-[0.15em] uppercase text-[#A72F27] underline underline-offset-2 hover:text-[#8B2520] transition-colors"
-            >
-              ← Volver
-            </Link>
-
-            <time className="mt-4 block font-sans text-[10px] text-[#A72F27] tracking-wider uppercase">
-              {noticia.fecha}
-            </time>
-            {(noticia.ubicacion || noticia.tipo) && (
-              <p className="mt-2 font-sans text-[0.7rem] text-[#724E48] tracking-[0.12em] uppercase">
-                {noticia.ubicacion}
-                {noticia.ubicacion && noticia.tipo ? " · " : ""}
-                {noticia.tipo}
-              </p>
-            )}
-
-            <h1 className="mt-2 font-serif text-[#5E2A29] text-2xl sm:text-3xl font-semibold leading-tight">
-              {noticia.titulo}
-            </h1>
-
-            <div className="mt-5 h-[2px] w-10 bg-[#A72F27]" aria-hidden="true" />
-
-            <div className="mt-6 space-y-4">
-              {noticia.contenido.map((parrafo, index) => (
-                <p
-                  key={`${noticia.slug}-parrafo-${index}`}
-                  className="font-sans text-[#724E48] text-[0.95rem] leading-relaxed"
-                >
-                  {parrafo}
-                </p>
-              ))}
+          <article className="overflow-hidden rounded-xl border border-[#E8D8C4] bg-[#FFFFFF] shadow-sm">
+            <div className="relative h-56 sm:h-72">
+              <Image
+                src={noticia.img}
+                alt={noticia.alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 768px"
+                priority
+              />
             </div>
-          </div>
-        </article>
+
+            <div className="p-6 sm:p-8">
+              <time className="block font-sans text-[10px] text-[#A72F27] tracking-wider uppercase">
+                {noticia.fecha}
+              </time>
+              {(noticia.ubicacion || noticia.tipo) && (
+                <p className="mt-2 font-sans text-[0.7rem] text-[#724E48] tracking-[0.12em] uppercase">
+                  {noticia.ubicacion}
+                  {noticia.ubicacion && noticia.tipo ? " · " : ""}
+                  {noticia.tipo}
+                </p>
+              )}
+
+              <h1 className="mt-2 font-serif text-[#5E2A29] text-2xl sm:text-3xl font-semibold leading-tight">
+                {noticia.titulo}
+              </h1>
+
+              <div className="mt-5 h-[2px] w-10 bg-[#A72F27]" aria-hidden="true" />
+
+              <div className="mt-6 space-y-4">
+                {noticia.contenido.map((parrafo, index) => (
+                  <p
+                    key={`${noticia.slug}-parrafo-${index}`}
+                    className="font-sans text-[#724E48] text-[0.95rem] leading-relaxed"
+                  >
+                    {parrafo}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </article>
+        </div>
 
         <nav
           className="max-w-3xl mx-auto mt-8 grid grid-cols-2 items-center"

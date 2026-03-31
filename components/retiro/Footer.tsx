@@ -8,6 +8,7 @@ const footerLinks = [
   { href: "/#actualidad", label: "Actualidad" },
   { href: "/#servicios", label: "Servicios" },
   { href: "/#resenias", label: "Reseñas" },
+  { href: "/#contacto", label: "Contacto" },
 ]
 
 export default function Footer() {

@@ -6,6 +6,7 @@ import LaDakini from "@/components/retiro/LaDakini"
 import Actualidad from "@/components/retiro/Actualidad"
 import Servicios from "@/components/retiro/Servicios"
 import Resenias from "@/components/retiro/Resenias"
+import Contacto from "@/components/retiro/Contacto"
 import Footer from "@/components/retiro/Footer"
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
         <Actualidad />
         <Servicios />
         <Resenias />
+        <Contacto />
       </main>
 
       <Footer />

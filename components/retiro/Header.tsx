@@ -67,11 +67,11 @@ export default function Header() {
           </nav>
           <div className="mt-auto pb-10">
             <Link
-              href="/#servicios"
+              href="/#contacto"
               onClick={() => setMenuOpen(false)}
               className="block w-full text-center bg-[#A72F27] text-white font-sans text-sm tracking-widest uppercase py-4 rounded-md hover:bg-[#8B2520] transition-colors"
             >
-              Explorar servicios
+              Reservar estancia
             </Link>
           </div>
         </div>
