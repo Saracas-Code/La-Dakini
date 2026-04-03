@@ -5,6 +5,7 @@
 
 :root {
   /* Buddhist Retreat — Warm Terracotta & Cream Palette */
+  --header-height: 56px;
   --background: #FFFFFF;
   --foreground: #5E2A29;
   --card: #FFFFFF;
@@ -125,6 +126,10 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-height) + 0.75rem);
+  }
   * {
     @apply border-border outline-ring/50;
   }

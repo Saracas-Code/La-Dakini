@@ -2,80 +2,250 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
 
 const navLinks = [
-  { href: "/#nosotros", label: "Nosotros" },
-  { href: "/#lama", label: "Nuestro Lama" },
-  { href: "/#dakini", label: "La Dakini" },
-  { href: "/#actualidad", label: "Actualidad" },
-  { href: "/#servicios", label: "Servicios" },
-  { href: "/#resenias", label: "Reseñas" },
+  { id: "nosotros", href: "/#nosotros", label: "Nosotros" },
+  { id: "lama", href: "/#lama", label: "Nuestro Lama" },
+  { id: "dakini", href: "/#dakini", label: "La Dakini" },
+  { id: "actualidad", href: "/#actualidad", label: "Actualidad" },
+  { id: "servicios", href: "/#servicios", label: "Servicios" },
+  { id: "resenias", href: "/#resenias", label: "Reseñas" },
 ]
+
+const contactoLink = {
+  id: "contacto",
+  href: "/#contacto",
+  label: "Contacto",
+}
+
+const HEADER_OFFSET_EXTRA = 12
+const PENDING_SECTION_KEY = "dakini:pending-section"
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState("")
+  const headerRef = useRef<HTMLElement | null>(null)
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const getHeaderOffset = useCallback(() => {
+    return (headerRef.current?.offsetHeight ?? 56) + HEADER_OFFSET_EXTRA
+  }, [])
+
+  const scrollToSection = useCallback(
+    (sectionId: string, updateUrl = true) => {
+      const target = document.getElementById(sectionId)
+
+      if (!target) return false
+
+      const top =
+        target.getBoundingClientRect().top + window.scrollY - getHeaderOffset()
+
+      window.scrollTo({
+        top: Math.max(top, 0),
+        behavior: "smooth",
+      })
+
+      if (updateUrl) {
+        window.history.replaceState(null, "", `/#${sectionId}`)
+      }
+
+      setActiveSection(sectionId)
+
+      return true
+    },
+    [getHeaderOffset],
+  )
+
+  const handleSectionNavigation = useCallback(
+    (sectionId: string, href: string) => {
+      setMenuOpen(false)
+
+      if (pathname === "/") {
+        scrollToSection(sectionId)
+        return
+      }
+
+      sessionStorage.setItem(PENDING_SECTION_KEY, sectionId)
+      router.push(href)
+    },
+    [pathname, router, scrollToSection],
+  )
+
+  useEffect(() => {
+    const { body, documentElement } = document
+    const previousBodyOverflow = body.style.overflow
+    const previousBodyOverscroll = body.style.overscrollBehavior
+    const previousHtmlOverflow = documentElement.style.overflow
+
+    if (menuOpen) {
+      body.style.overflow = "hidden"
+      body.style.overscrollBehavior = "none"
+      documentElement.style.overflow = "hidden"
+    }
+
+    return () => {
+      body.style.overflow = previousBodyOverflow
+      body.style.overscrollBehavior = previousBodyOverscroll
+      documentElement.style.overflow = previousHtmlOverflow
+    }
+  }, [menuOpen])
+
+  useEffect(() => {
+    if (pathname !== "/") return
+
+    const pendingSection = sessionStorage.getItem(PENDING_SECTION_KEY)
+    const hashSection = decodeURIComponent(window.location.hash.replace("#", ""))
+    const targetSection = pendingSection || hashSection
+
+    if (!targetSection) return
+
+    sessionStorage.removeItem(PENDING_SECTION_KEY)
+
+    const timeoutId = window.setTimeout(() => {
+      scrollToSection(targetSection, false)
+    }, 80)
+
+    return () => window.clearTimeout(timeoutId)
+  }, [pathname, scrollToSection])
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActiveSection("")
+      return
+    }
+
+    const updateActiveSection = () => {
+      const scrollPosition = window.scrollY + getHeaderOffset() + 8
+      let currentSection = ""
+
+      for (const link of navLinks) {
+        const section = document.getElementById(link.id)
+
+        if (section && scrollPosition >= section.offsetTop) {
+          currentSection = link.id
+        }
+      }
+
+      setActiveSection(currentSection)
+    }
+
+    updateActiveSection()
+
+    window.addEventListener("scroll", updateActiveSection, { passive: true })
+    window.addEventListener("resize", updateActiveSection)
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection)
+      window.removeEventListener("resize", updateActiveSection)
+    }
+  }, [getHeaderOffset, pathname])
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 h-14 bg-[#FFFFFF]/95 backdrop-blur-sm border-b border-[#E8D8C4]">
-        {/* Logo */}
+      <header
+        ref={headerRef}
+        className="fixed top-0 left-0 right-0 z-50 flex h-14 items-center justify-between border-b border-[#E8D8C4] bg-[#FFFFFF]/95 px-5 backdrop-blur-sm"
+      >
         <Link href="/" className="flex items-center gap-2.5" aria-label="Ir a inicio">
           <Image
             src="/LOGO-DAKINI-transparent.png"
             alt="Logo Dakini"
             width={40}
             height={40}
-            className="h-9 w-9 sm:h-10 sm:w-10 object-contain shrink-0"
+            className="h-9 w-9 shrink-0 object-contain sm:h-10 sm:w-10"
             priority
           />
-          <span className="font-serif text-[#5E2A29] text-[15px] font-semibold leading-tight tracking-wide">
-            Monasterio Budista<br />
-            <span className="text-[11px] font-normal tracking-widest text-[#724E48]">SHAMBALA NORBU</span>
+          <span className="font-serif text-[15px] font-semibold leading-tight tracking-wide text-[#5E2A29]">
+            Monasterio Budista
+            <br />
+            <span className="text-[11px] font-normal tracking-widest text-[#724E48]">
+              SHAMBALA NORBU
+            </span>
           </span>
         </Link>
 
-        {/* Hamburger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="w-10 h-10 flex items-center justify-center text-[#5E2A29] rounded-full hover:bg-[#FBF3DC] transition-colors"
+          className="flex h-10 w-10 items-center justify-center rounded-full text-[#5E2A29] transition-colors hover:bg-[#FBF3DC]"
           aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
         >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          <span className="relative h-4 w-5" aria-hidden="true">
+            <span
+              className={`absolute left-0 h-[2px] w-5 rounded-full bg-current transition-all duration-300 ease-out ${
+                menuOpen ? "top-[7px] rotate-45" : "top-0"
+              }`}
+            />
+            <span
+              className={`absolute left-0 top-[7px] h-[2px] w-5 rounded-full bg-current transition-all duration-300 ease-out ${
+                menuOpen ? "opacity-0" : "opacity-100"
+              }`}
+            />
+            <span
+              className={`absolute left-0 h-[2px] w-5 rounded-full bg-current transition-all duration-300 ease-out ${
+                menuOpen ? "top-[7px] -rotate-45" : "top-[14px]"
+              }`}
+            />
+          </span>
         </button>
       </header>
 
-      {/* Full-screen mobile nav */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#FBF3DC] flex flex-col pt-20 px-8">
-          <nav aria-label="Navegación principal">
-            <ul className="flex flex-col gap-0">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="block py-2.5 text-[16px] font-serif text-[#5E2A29] border-b border-[#E8D8C4] hover:text-[#A72F27] transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <div className="mt-auto pb-10">
-            <Link
-              href="/#contacto"
-              onClick={() => setMenuOpen(false)}
-              className="block w-full text-center bg-[#A72F27] text-white font-sans text-sm tracking-widest uppercase py-4 rounded-md hover:bg-[#8B2520] transition-colors"
-            >
-              Reservar estancia
-            </Link>
-          </div>
+      <div
+        className={`fixed inset-0 z-40 bg-[#5E2A29]/10 backdrop-blur-[2px] transition-opacity duration-300 ease-out ${
+          menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        onClick={() => setMenuOpen(false)}
+        aria-hidden="true"
+      />
+
+      <aside
+        id="mobile-navigation"
+        className={`fixed inset-y-0 right-0 z-40 flex w-full max-w-sm flex-col border-l border-[#E8D8C4]/80 bg-[#FBF3DC]/88 px-8 pt-20 pb-10 shadow-[-18px_0_60px_-28px_rgba(94,42,41,0.6)] backdrop-blur-xl transition-transform duration-300 ease-out ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+        aria-hidden={!menuOpen}
+      >
+        <nav aria-label="Navegación principal">
+          <ul className="flex flex-col gap-0">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  onClick={(event) => {
+                    event.preventDefault()
+                    handleSectionNavigation(link.id, link.href)
+                  }}
+                  aria-current={activeSection === link.id ? "location" : undefined}
+                  className={`block border-b border-[#E8D8C4]/80 py-3 font-serif text-[16px] transition-colors ${
+                    activeSection === link.id
+                      ? "text-[#A72F27]"
+                      : "text-[#5E2A29] hover:text-[#A72F27]"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="mt-auto">
+          <Link
+            href={contactoLink.href}
+            onClick={(event) => {
+              event.preventDefault()
+              handleSectionNavigation(contactoLink.id, contactoLink.href)
+            }}
+            className="block w-full rounded-md bg-[#A72F27] py-4 text-center font-sans text-sm tracking-widest uppercase text-white transition-colors hover:bg-[#8B2520]"
+          >
+            Reservar estancia
+          </Link>
         </div>
-      )}
+      </aside>
     </>
   )
 }

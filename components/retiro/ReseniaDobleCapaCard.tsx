@@ -99,23 +99,35 @@ export default function ReseniaDobleCapaCard({
         {abierta ? "Esconder verdad" : "Lo que no contó"}
       </button>
 
-      {abierta && (
-        <div id={hiddenId} className="rounded-lg bg-[#5E2A29] p-4 text-[#FBF3DC]">
-          <p className="font-sans text-[11px] tracking-[0.1em] uppercase text-[#FBF3DC]/80 mb-2">
-            Lo que no contó
-          </p>
-          <StarRating
-            value={resenia.estrellasOcultas}
-            filledColor="#FBF3DC"
-            emptyColor="#9E7B79"
-            overflowColor="#F2C14D"
-            className="mb-2"
-          />
-          <p className="font-sans text-[13px] leading-relaxed text-[#FBF3DC]">
-            {resenia.textoOculto}
-          </p>
+      <div
+        className={`grid overflow-hidden transition-[grid-template-rows,opacity] duration-300 ease-out ${
+          abierta ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+        aria-hidden={!abierta}
+      >
+        <div className="overflow-hidden">
+          <div
+            id={hiddenId}
+            className={`rounded-lg bg-[#5E2A29] p-4 text-[#FBF3DC] transition-transform duration-300 ease-out ${
+              abierta ? "translate-y-0" : "-translate-y-2"
+            }`}
+          >
+            <p className="mb-2 font-sans text-[11px] tracking-[0.1em] uppercase text-[#FBF3DC]/80">
+              Lo que no contó
+            </p>
+            <StarRating
+              value={resenia.estrellasOcultas}
+              filledColor="#FBF3DC"
+              emptyColor="#9E7B79"
+              overflowColor="#F2C14D"
+              className="mb-2"
+            />
+            <p className="font-sans text-[13px] leading-relaxed text-[#FBF3DC]">
+              {resenia.textoOculto}
+            </p>
+          </div>
         </div>
-      )}
+      </div>
 
       <div className="pt-1 border-t border-[#E8D8C4]">
         <div className="flex items-center gap-3">
