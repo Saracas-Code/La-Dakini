@@ -1,5 +1,8 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
+import { useState } from "react"
 
 import {
   serviciosPrincipales,
@@ -9,6 +12,8 @@ import {
 const servicioPrincipal = serviciosPrincipales[0]
 
 export default function Servicios() {
+  const [servicioActivo, setServicioActivo] = useState<string | null>(null)
+
   return (
     <section
       id="servicios"
@@ -73,37 +78,68 @@ export default function Servicios() {
 
           <div className="mt-6 grid grid-cols-2 gap-2.5 lg:grid-cols-3">
             {serviciosSecundarios.map((servicio) => (
-              <div
+              <button
+                type="button"
                 key={servicio.titulo}
-                className="group relative aspect-square overflow-hidden rounded-md border border-[#E8D8C4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A72F27]/35"
-                tabIndex={0}
-                role="img"
-                aria-label={servicio.alt}
+                onClick={() =>
+                  setServicioActivo((actual) =>
+                    actual === servicio.titulo ? null : servicio.titulo,
+                  )
+                }
+                aria-label={servicio.titulo}
+                aria-pressed={servicioActivo === servicio.titulo}
+                className="group relative aspect-square overflow-hidden rounded-md border border-[#E8D8C4] text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A72F27]/35"
               >
                 <Image
                   src={servicio.imagen}
                   alt={servicio.alt}
                   fill
-                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06] group-focus-visible:scale-[1.06]"
+                  className={`object-cover transition-transform duration-500 ease-out ${
+                    servicioActivo === servicio.titulo
+                      ? "scale-[1.06]"
+                      : "group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
+                  }`}
                   sizes="(max-width: 640px) 50vw, 240px"
                 />
                 <div
-                  className="absolute inset-0 flex items-end bg-[#5E2A29]/60 p-2.5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  className={`absolute inset-0 transition-opacity duration-300 ${
+                    servicioActivo === servicio.titulo
+                      ? "bg-[#3C1A1A]/78 opacity-100"
+                      : "opacity-0"
+                  }`}
                   aria-hidden="true"
-                >
-                  <span className="font-sans text-[10px] tracking-wider uppercase text-[#FBF3DC]">
-                    {servicio.titulo}
-                  </span>
-                </div>
+                />
                 <div
-                  className="absolute bottom-0 left-0 right-0 flex items-end bg-gradient-to-t from-[#5E2A29]/50 to-transparent px-2.5 py-2.5 transition-opacity duration-300 group-hover:opacity-0 group-focus-visible:opacity-0"
-                  aria-hidden="true"
+                  className={`absolute inset-x-0 bottom-0 flex h-full flex-col justify-end p-3 transition-all duration-300 ${
+                    servicioActivo === servicio.titulo
+                      ? "bg-gradient-to-t from-[#2F1212]/30 via-[#2F1212]/15 to-transparent"
+                      : "bg-gradient-to-t from-[#5E2A29]/55 to-transparent"
+                  }`}
                 >
-                  <span className="font-sans text-[9px] tracking-wider uppercase text-[#FBF3DC]">
+                  <p
+                    className={`font-sans tracking-wider uppercase text-[#FBF3DC] transition-all duration-300 ${
+                      servicioActivo === servicio.titulo
+                        ? "max-h-0 overflow-hidden opacity-0"
+                        : "text-[9px]"
+                    }`}
+                  >
                     {servicio.titulo}
-                  </span>
+                  </p>
+                  <div
+                    className={`grid overflow-hidden transition-[grid-template-rows,margin-top,opacity] duration-300 ease-out ${
+                      servicioActivo === servicio.titulo
+                        ? "mt-0 grid-rows-[1fr] opacity-100"
+                        : "mt-0 grid-rows-[0fr] opacity-0"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="font-sans text-[0.7rem] leading-5 text-[#FBF3DC]/92">
+                        {servicio.descripcion}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>

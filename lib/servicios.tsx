@@ -15,6 +15,7 @@ export type ServicioPrincipal = {
 
 export type ServicioSecundario = {
   titulo: string
+  descripcion: string
   imagen: string
   alt: string
 }
@@ -62,33 +63,45 @@ export const serviciosPrincipales: ServicioPrincipal[] = [
 export const serviciosSecundarios: ServicioSecundario[] = [
   {
     titulo: "Meditación Guiada",
+    descripcion:
+      "Sesiones diarias de meditación con acompañamiento personalizado.",
     imagen: "/images/meditacion_guiada.jpeg",
     alt: "Meditación Guiada",
   },
   {
     titulo: "Yoga Tibetano",
+    descripcion:
+      "Práctica de movimiento consciente inspirada en el Yantra Yoga.",
     imagen: "/images/yoga_tibetano.jpeg",
     alt: "Yoga Tibetano",
   },
   {
-    titulo: "Consultas privadas con el Lama",
+    titulo: "Consultas Privadas",
+    descripcion:
+      "Encuentros individuales con el Lama para recibir orientación espiritual.",
     imagen: "/images/consultas_privadas.jpeg",
-    alt: "Consultas privadas con el Lama",
+    alt: "Consultas Privadas",
   },
   {
-    titulo: "Enseñanzas de Filosofía Budista",
+    titulo: "Filosofía Budista",
+    descripcion:
+      "Espacios de contemplación sobre los principios esenciales del budismo tibetano.",
     imagen: "/images/filosofia_budista.jpeg",
-    alt: "Enseñanzas de Filosofía Budista",
+    alt: "Filosofía Budista",
   },
   {
-    titulo: "Rituales tradicionales",
+    titulo: "Prácticas Rituales",
+    descripcion:
+      "Ceremonias tradicionales, cantos, ofrendas y prácticas devocionales.",
     imagen: "/images/gallery-3.jpg",
-    alt: "Ceremonia religiosa con lámparas de mantequilla",
+    alt: "Prácticas Rituales",
   },
   {
-    titulo: "Retiros de 3 a 21 días",
+    titulo: "Retiros en Silencio",
+    descripcion:
+      "Experiencias de 3 a 21 días para profundizar en la observación de la mente.",
     imagen: "/images/retiro_silencio.jpeg",
-    alt: "Retiros de 3 a 21 días",
+    alt: "Retiros en Silencio",
   },
 ]
 
