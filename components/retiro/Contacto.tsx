@@ -295,11 +295,11 @@ export default function Contacto() {
           {[
             {
               icon: <Phone size={16} className="shrink-0" />,
-              text: "+86 897 245 18 62",
+              text: "+34 628 90 31 26",
             },
             {
               icon: <Mail size={16} className="shrink-0" />,
-              text: "info@centrodharmakaruna.org",
+              text: "mariangomezloira@outlook.com",
             },
             {
               icon: <Clock size={16} className="shrink-0" />,

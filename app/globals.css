@@ -127,7 +127,6 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     scroll-padding-top: calc(var(--header-height) + 0.75rem);
   }
   * {
@@ -140,4 +139,10 @@
     font-size: 0.92em;
     letter-spacing: 0.01em;
   }
+}
+
+.fictional-disclaimer {
+  margin-top: 15px;
+  font-size: 0.75rem;
+  color: #c8c1bc;
 }

@@ -35,7 +35,13 @@ export default function Header() {
   }, [])
 
   const scrollToSection = useCallback(
-    (sectionId: string, updateUrl = true) => {
+    (
+      sectionId: string,
+      {
+        updateUrl = true,
+        behavior = "smooth",
+      }: { updateUrl?: boolean; behavior?: ScrollBehavior } = {},
+    ) => {
       const target = document.getElementById(sectionId)
 
       if (!target) return false
@@ -45,7 +51,7 @@ export default function Header() {
 
       window.scrollTo({
         top: Math.max(top, 0),
-        behavior: "smooth",
+        behavior,
       })
 
       if (updateUrl) {
@@ -64,7 +70,7 @@ export default function Header() {
       setMenuOpen(false)
 
       if (pathname === "/") {
-        scrollToSection(sectionId)
+        scrollToSection(sectionId, { behavior: "smooth" })
         return
       }
 
@@ -105,7 +111,7 @@ export default function Header() {
     sessionStorage.removeItem(PENDING_SECTION_KEY)
 
     const timeoutId = window.setTimeout(() => {
-      scrollToSection(targetSection, false)
+      scrollToSection(targetSection, { updateUrl: false, behavior: "auto" })
     }, 80)
 
     return () => window.clearTimeout(timeoutId)
