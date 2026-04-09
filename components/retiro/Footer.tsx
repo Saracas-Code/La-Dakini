@@ -7,14 +7,14 @@ const footerLinks = [
   { href: "/#dakini", label: "Dakini" },
   { href: "/#actualidad", label: "Actualidad" },
   { href: "/#servicios", label: "Servicios" },
-  { href: "/#resenias", label: "Reseñas" },
+  { href: "/#resenias", label: "Rese\u00f1as" },
   { href: "/#contacto", label: "Contacto" },
 ]
 
 export default function Footer() {
   return (
     <footer className="bg-[#5E2A29] px-6 py-10 text-center">
-      <div className="max-w-sm mx-auto flex flex-col items-center gap-5">
+      <div className="mx-auto flex max-w-sm flex-col items-center gap-5">
         <Image
           src="/LOGO-DAKINI-CLARO-transparent.png"
           alt="Logo Dakini"
@@ -24,19 +24,21 @@ export default function Footer() {
         />
 
         <div>
-          <p className="font-serif text-[#FBF3DC] text-lg font-semibold">Monasterio Shambala Norbu</p>
-          <p className="font-sans text-[#FBF3DC]/60 text-[11px] tracking-widest uppercase mt-1">
+          <p className="font-serif text-lg font-semibold text-[#FBF3DC]">
+            Monasterio Shambala Norbu
+          </p>
+          <p className="mt-1 font-sans text-[11px] uppercase tracking-widest text-[#FBF3DC]/60">
             Retiros Espirituales Budistas
           </p>
         </div>
 
-        <nav aria-label="Navegación del pie de página">
+        <nav aria-label="Navegaci\u00f3n del pie de p\u00e1gina">
           <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2">
             {footerLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="font-sans text-[#FBF3DC]/70 text-[11px] tracking-wider hover:text-[#FBF3DC] transition-colors"
+                  className="font-sans text-[11px] tracking-wider text-[#FBF3DC]/70 transition-colors hover:text-[#FBF3DC]"
                 >
                   {link.label}
                 </Link>
@@ -45,12 +47,18 @@ export default function Footer() {
           </ul>
         </nav>
 
-        <div className="w-full h-px bg-[#FBF3DC]/20" aria-hidden="true" />
+        <div className="h-px w-full bg-[#FBF3DC]/20" aria-hidden="true" />
 
-        <p className="font-sans text-[#FBF3DC]/50 text-[10px] tracking-wide">
-          © 2025 Monasterio Shambala Norbu · Todos los derechos reservados
+        <p className="font-sans text-[10px] tracking-wide text-[#FBF3DC]/50">
+          &copy; 2025 Monasterio Shambala Norbu &middot; Todos los derechos reservados
         </p>
-        <p className="font-serif text-[#FBF3DC]/40 text-[11px] italic">
+        <p className="fictional-disclaimer font-sans">
+          Este sitio web es una obra de ficci&oacute;n con fines promocionales
+          cinematogr&aacute;ficos. El Monasterio de Shambala Norbu y los eventos aqu&iacute;
+          descritos no existen en la realidad, si no que son parte del desarrollo de la obra
+          cinematogr&aacute;fica "La Dakini"
+        </p>
+        <p className="font-serif text-[11px] italic text-[#FBF3DC]/40">
           Que todos los seres sean felices
         </p>
       </div>
