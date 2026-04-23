@@ -13,54 +13,62 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#5E2A29] px-6 py-10 text-center">
-      <div className="mx-auto flex max-w-sm flex-col items-center gap-5">
-        <Image
-          src="/LOGO-DAKINI-CLARO-transparent.png"
-          alt="Logo Dakini"
-          width={40}
-          height={40}
-          className="h-10 w-10 object-contain bg-transparent"
-        />
+    <footer className="bg-[#5E2A29] px-6 py-10 text-center md:px-8 lg:px-10 lg:py-12 lg:text-left">
+      <div className="mx-auto flex max-w-sm flex-col items-center gap-5 md:max-w-2xl lg:max-w-6xl lg:items-stretch">
+        <div className="flex flex-col items-center gap-5 lg:flex-row lg:justify-between">
+          <div className="flex flex-col items-center gap-4 lg:flex-row lg:text-left">
+            <Image
+              src="/LOGO-DAKINI-CLARO-transparent.png"
+              alt="Logo Dakini"
+              width={40}
+              height={40}
+              className="h-10 w-10 object-contain bg-transparent"
+            />
 
-        <div>
-          <p className="font-serif text-lg font-semibold text-[#FBF3DC]">
-            Monasterio Shambala Norbu
-          </p>
-          <p className="mt-1 font-sans text-[11px] uppercase tracking-widest text-[#FBF3DC]/60">
-            Retiros Espirituales Budistas
-          </p>
+            <div>
+              <p className="font-serif text-lg font-semibold text-[#FBF3DC]">
+                Monasterio Shambala Norbu
+              </p>
+              <p className="mt-1 font-sans text-[11px] uppercase tracking-widest text-[#FBF3DC]/60">
+                Retiros Espirituales Budistas
+              </p>
+            </div>
+          </div>
+
+          <nav aria-label="Navegaci\u00f3n del pie de p\u00e1gina">
+            <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2 lg:justify-end">
+              {footerLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="font-sans text-[11px] tracking-wider text-[#FBF3DC]/70 transition-colors hover:text-[#FBF3DC]"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
-
-        <nav aria-label="Navegaci\u00f3n del pie de p\u00e1gina">
-          <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2">
-            {footerLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="font-sans text-[11px] tracking-wider text-[#FBF3DC]/70 transition-colors hover:text-[#FBF3DC]"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
 
         <div className="h-px w-full bg-[#FBF3DC]/20" aria-hidden="true" />
 
-        <p className="font-sans text-[10px] tracking-wide text-[#FBF3DC]/50">
-          &copy; 2025 Monasterio Shambala Norbu &middot; Todos los derechos reservados
-        </p>
-        <p className="fictional-disclaimer font-sans">
-          Este sitio web es una obra de ficci&oacute;n con fines promocionales
-          cinematogr&aacute;ficos. El Monasterio de Shambala Norbu y los eventos aqu&iacute;
-          descritos no existen en la realidad, si no que son parte del desarrollo de la obra
-          cinematogr&aacute;fica "La Dakini"
-        </p>
-        <p className="font-serif text-[11px] italic text-[#FBF3DC]/40">
-          Que todos los seres sean felices
-        </p>
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+          <div>
+            <p className="font-sans text-[10px] tracking-wide text-[#FBF3DC]/50">
+              &copy; 2025 Monasterio Shambala Norbu &middot; Todos los derechos reservados
+            </p>
+            <p className="fictional-disclaimer font-sans lg:max-w-3xl">
+              Este sitio web es una obra de ficci&oacute;n con fines promocionales
+              cinematogr&aacute;ficos. El Monasterio de Shambala Norbu y los eventos aqu&iacute;
+              descritos no existen en la realidad, si no que son parte del desarrollo de la obra
+              cinematogr&aacute;fica "La Dakini"
+            </p>
+          </div>
+          <p className="font-serif text-[11px] italic text-[#FBF3DC]/40 lg:text-right">
+            Que todos los seres sean felices
+          </p>
+        </div>
       </div>
     </footer>
   )

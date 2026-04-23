@@ -1,3 +1,8 @@
+"use client"
+
+import { useCallback, useEffect, useId, useRef, useState } from "react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+
 import ReseniaDobleCapaCard, {
   type ReseniaDobleCapa,
 } from "@/components/retiro/ReseniaDobleCapaCard"
@@ -6,9 +11,10 @@ const resenias: ReseniaDobleCapa[] = [
   {
     id: 1,
     nombre: "Marisa",
+    perfil: "Ama de casa",
     fotoPerfil: "/placeholder-user.jpg",
     estrellasPublicas: 5,
-    estrellasOcultas: 10,
+    estrellasOcultas: 9,
     textoPublico:
       "Muy recomendable. Te cuidan mejor que en casa.",
     textoOculto:
@@ -17,6 +23,7 @@ const resenias: ReseniaDobleCapa[] = [
   {
     id: 2,
     nombre: "Ernesto",
+    perfil: "Empresario agroalimentario",
     fotoPerfil: "/placeholder-user.jpg",
     estrellasPublicas: 3,
     estrellasOcultas: 0,
@@ -28,6 +35,7 @@ const resenias: ReseniaDobleCapa[] = [
   {
     id: 3,
     nombre: "Pelayo",
+    perfil: "Traductor turístico",
     fotoPerfil: "/placeholder-user.jpg",
     estrellasPublicas: 5,
     estrellasOcultas: 3,
@@ -39,6 +47,7 @@ const resenias: ReseniaDobleCapa[] = [
   {
     id: 4,
     nombre: "Carla",
+    perfil: "Influencer experta en marketing",
     fotoPerfil: "/placeholder-user.jpg",
     estrellasPublicas: 5,
     estrellasOcultas: 4,
@@ -50,6 +59,7 @@ const resenias: ReseniaDobleCapa[] = [
   {
     id: 5,
     nombre: "Luis",
+    perfil: "Ex sacerdote",
     fotoPerfil: "/placeholder-user.jpg",
     estrellasPublicas: 4,
     estrellasOcultas: 5,
@@ -61,6 +71,7 @@ const resenias: ReseniaDobleCapa[] = [
   {
     id: 6,
     nombre: "Rebeca",
+    perfil: "Comercial divorciada",
     fotoPerfil: "/placeholder-user.jpg",
     estrellasPublicas: 5,
     estrellasOcultas: 5,
@@ -72,6 +83,7 @@ const resenias: ReseniaDobleCapa[] = [
   {
     id: 7,
     nombre: "Alba",
+    perfil: "Administrativa divorciada",
     fotoPerfil: "/placeholder-user.jpg",
     estrellasPublicas: 5,
     estrellasOcultas: 3,
@@ -83,6 +95,7 @@ const resenias: ReseniaDobleCapa[] = [
   {
     id: 8,
     nombre: "María",
+    perfil: "Recién casada",
     fotoPerfil: "/placeholder-user.jpg",
     estrellasPublicas: 5,
     estrellasOcultas: 7,
@@ -94,6 +107,7 @@ const resenias: ReseniaDobleCapa[] = [
   {
     id: 9,
     nombre: "Pablo",
+    perfil: "Recién casado",
     fotoPerfil: "/placeholder-user.jpg",
     estrellasPublicas: 5,
     estrellasOcultas: 4,
@@ -105,6 +119,7 @@ const resenias: ReseniaDobleCapa[] = [
   {
     id: 10,
     nombre: "Oliver",
+    perfil: "Creativo freelance",
     fotoPerfil: "/placeholder-user.jpg",
     estrellasPublicas: 4,
     estrellasOcultas: 5,
@@ -116,24 +131,217 @@ const resenias: ReseniaDobleCapa[] = [
 ]
 
 export default function Resenias() {
-  return (
-    <section id="resenias" className="py-16 px-5 bg-[#FFFFFF]">
-      {/* Header */}
-      <div className="text-center mb-10">
-        <p className="text-[11px] tracking-[0.2em] uppercase text-[#A72F27] font-sans mb-2">
-          Voces de nuestra comunidad
-        </p>
-        <h2 className="font-serif text-[28px] text-[#5E2A29] leading-snug text-balance">
-          Reseñas
-        </h2>
-        <div className="w-8 h-px bg-[#A72F27] mx-auto mt-4" />
-      </div>
+  const carouselId = useId()
+  const carouselRef = useRef<HTMLUListElement | null>(null)
+  const cardRefs = useRef<Array<HTMLElement | null>>([])
+  const prefersReducedMotionRef = useRef(false)
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(true)
+  const [alturaReposo, setAlturaReposo] = useState<number | null>(null)
+  const [reseniasVerdadActivas, setReseniasVerdadActivas] = useState<number[]>(
+    [],
+  )
 
-      {/* Cards */}
-      <div className="flex flex-col gap-4 max-w-md mx-auto">
-        {resenias.map((resenia) => (
-          <ReseniaDobleCapaCard key={resenia.id} resenia={resenia} />
-        ))}
+  const updateRestHeight = useCallback(() => {
+    if (reseniasVerdadActivas.length > 0) return
+
+    const alturas = cardRefs.current
+      .map((card) => card?.getBoundingClientRect().height ?? 0)
+      .filter(Boolean)
+
+    if (alturas.length === 0) return
+
+    setAlturaReposo(Math.ceil(Math.max(...alturas)))
+  }, [reseniasVerdadActivas.length])
+
+  const updateScrollState = useCallback(() => {
+    const carousel = carouselRef.current
+
+    if (!carousel) return
+
+    const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth
+
+    setCanScrollPrev(carousel.scrollLeft > 8)
+    setCanScrollNext(carousel.scrollLeft < maxScrollLeft - 8)
+  }, [])
+
+  const getScrollStep = useCallback(() => {
+    const carousel = carouselRef.current
+
+    if (!carousel) return 0
+
+    const firstSlide = carousel.querySelector<HTMLElement>("[data-carousel-item='true']")
+    const styles = window.getComputedStyle(carousel)
+    const gap = Number.parseFloat(styles.gap || styles.columnGap || "0")
+
+    return (firstSlide?.offsetWidth ?? carousel.clientWidth * 0.86) + gap
+  }, [])
+
+  const scrollByStep = useCallback(
+    (direction: "prev" | "next") => {
+      const carousel = carouselRef.current
+
+      if (!carousel) return
+
+      const step = getScrollStep()
+
+      carousel.scrollBy({
+        left: direction === "next" ? step : -step,
+        behavior: prefersReducedMotionRef.current ? "auto" : "smooth",
+      })
+    },
+    [getScrollStep],
+  )
+
+  const handleCarouselKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLUListElement>) => {
+      if (event.key === "ArrowRight") {
+        event.preventDefault()
+        scrollByStep("next")
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault()
+        scrollByStep("prev")
+      }
+    },
+    [scrollByStep],
+  )
+
+  const toggleVerdad = useCallback((reseniaId: number) => {
+    setReseniasVerdadActivas((actuales) =>
+      actuales.includes(reseniaId)
+        ? actuales.filter((id) => id !== reseniaId)
+        : [...actuales, reseniaId],
+    )
+  }, [])
+
+  const setCardRef = useCallback(
+    (index: number) => (node: HTMLElement | null) => {
+      cardRefs.current[index] = node
+    },
+    [],
+  )
+
+  useEffect(() => {
+    prefersReducedMotionRef.current = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches
+
+    updateScrollState()
+
+    const carousel = carouselRef.current
+
+    if (!carousel) return
+
+    const handleScroll = () => updateScrollState()
+
+    carousel.addEventListener("scroll", handleScroll, { passive: true })
+    window.addEventListener("resize", updateScrollState)
+
+    return () => {
+      carousel.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("resize", updateScrollState)
+    }
+  }, [updateScrollState])
+
+  useEffect(() => {
+    const rafId = window.requestAnimationFrame(() => {
+      updateRestHeight()
+    })
+
+    const handleResize = () => {
+      window.requestAnimationFrame(() => {
+        updateRestHeight()
+      })
+    }
+
+    window.addEventListener("resize", handleResize)
+
+    return () => {
+      window.cancelAnimationFrame(rafId)
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [updateRestHeight])
+
+  return (
+    <section
+      id="resenias"
+      className="bg-[#FFFFFF] px-5 py-16 md:px-8 md:py-20 lg:px-10 lg:py-24"
+      aria-labelledby="resenias-title"
+    >
+      {/* Header */}
+      <div className="mx-auto max-w-sm md:max-w-3xl lg:max-w-6xl">
+        <div className="mb-10 text-center md:max-w-2xl md:text-left lg:mb-12 lg:flex lg:items-end lg:justify-between lg:gap-6">
+          <div>
+            <p className="mb-2 font-sans text-[11px] tracking-[0.2em] text-[#A72F27] uppercase">
+              Voces de nuestra comunidad
+            </p>
+            <h2
+              id="resenias-title"
+              className="font-serif text-[28px] leading-snug text-[#5E2A29] text-balance md:text-3xl"
+            >
+              Reseñas
+            </h2>
+            <div className="mx-auto mt-4 h-px w-8 bg-[#A72F27] md:mx-0" />
+          </div>
+
+          <div className="hidden items-center gap-2 lg:flex">
+            <button
+              type="button"
+              onClick={() => scrollByStep("prev")}
+              aria-label="Ver reseñas anteriores"
+              aria-controls={carouselId}
+              disabled={!canScrollPrev}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#E8D8C4] bg-[#FBF3DC] text-[#5E2A29] transition-colors hover:bg-[#F3E8D3] disabled:cursor-not-allowed disabled:opacity-45"
+            >
+              <ChevronLeft size={18} aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollByStep("next")}
+              aria-label="Ver más reseñas"
+              aria-controls={carouselId}
+              disabled={!canScrollNext}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#E8D8C4] bg-[#FBF3DC] text-[#5E2A29] transition-colors hover:bg-[#F3E8D3] disabled:cursor-not-allowed disabled:opacity-45"
+            >
+              <ChevronRight size={18} aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+
+        <div
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Carrusel de reseñas"
+        >
+          <ul
+            id={carouselId}
+            ref={carouselRef}
+            tabIndex={0}
+            onKeyDown={handleCarouselKeyDown}
+            className="flex items-start snap-x snap-mandatory gap-4 overflow-x-auto pb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A72F27]/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[#FFFFFF] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {resenias.map((resenia, index) => (
+              <li
+                key={resenia.id}
+                role="group"
+                aria-roledescription="slide"
+                data-carousel-item="true"
+                aria-label={`Reseña ${index + 1} de ${resenias.length}`}
+                className="flex min-w-0 shrink-0 basis-[88%] snap-start sm:basis-[72%] md:basis-[calc((100%-1rem)/2)] lg:basis-[calc((100%-2rem)/3)]"
+              >
+                <ReseniaDobleCapaCard
+                  resenia={resenia}
+                  mostrarVerdad={reseniasVerdadActivas.includes(resenia.id)}
+                  onToggleVerdad={() => toggleVerdad(resenia.id)}
+                  alturaReposo={alturaReposo}
+                  cardRef={setCardRef(index)}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   )
