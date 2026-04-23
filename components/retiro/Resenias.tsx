@@ -314,13 +314,14 @@ export default function Resenias() {
           role="region"
           aria-roledescription="carousel"
           aria-label="Carrusel de reseñas"
+          className="relative"
         >
           <ul
             id={carouselId}
             ref={carouselRef}
             tabIndex={0}
             onKeyDown={handleCarouselKeyDown}
-            className="flex items-start snap-x snap-mandatory gap-4 overflow-x-auto pb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A72F27]/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[#FFFFFF] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            className="flex items-start snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden pb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A72F27]/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[#FFFFFF] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           >
             {resenias.map((resenia, index) => (
               <li
@@ -341,6 +342,19 @@ export default function Resenias() {
               </li>
             ))}
           </ul>
+
+          <div
+            aria-hidden="true"
+            className={`pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-[#FFFFFF]/68 via-[#FFFFFF]/26 to-transparent transition-opacity duration-300 md:w-14 ${
+              canScrollPrev ? "opacity-100" : "opacity-0"
+            }`}
+          />
+          <div
+            aria-hidden="true"
+            className={`pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#FFFFFF]/68 via-[#FFFFFF]/26 to-transparent transition-opacity duration-300 md:w-14 ${
+              canScrollNext ? "opacity-100" : "opacity-0"
+            }`}
+          />
         </div>
       </div>
     </section>

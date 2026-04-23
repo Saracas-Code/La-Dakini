@@ -53,18 +53,25 @@ function StarRating({
 
   return (
     <div
-      className={`flex flex-wrap gap-0.5 ${className ?? ""}`.trim()}
+      className={`flex flex-col items-start gap-1 ${className ?? ""}`.trim()}
       aria-label={`${safeValue} estrellas`}
     >
-      {Array.from({ length: filled }).map((_, i) => (
-        <StarIcon key={`filled-${i}`} color={filledColor} />
-      ))}
-      {Array.from({ length: empty }).map((_, i) => (
-        <StarIcon key={`empty-${i}`} color={emptyColor} filled={false} />
-      ))}
-      {Array.from({ length: overflow }).map((_, i) => (
-        <StarIcon key={`overflow-${i}`} color={overflowColor} />
-      ))}
+      <div className="flex flex-wrap gap-0.5">
+        {Array.from({ length: filled }).map((_, i) => (
+          <StarIcon key={`filled-${i}`} color={filledColor} />
+        ))}
+        {Array.from({ length: empty }).map((_, i) => (
+          <StarIcon key={`empty-${i}`} color={emptyColor} filled={false} />
+        ))}
+      </div>
+
+      {overflow > 0 ? (
+        <div className="flex flex-wrap gap-0.5">
+          {Array.from({ length: overflow }).map((_, i) => (
+            <StarIcon key={`overflow-${i}`} color={overflowColor} />
+          ))}
+        </div>
+      ) : null}
     </div>
   )
 }
