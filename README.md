@@ -44,4 +44,14 @@ Si se usa el mapa de contacto, define:
 NEXT_PUBLIC_MAPS_API_KEY=...
 ```
 
-En Vercel, configura la misma variable desde el panel del proyecto.
+Para que el formulario de contacto envie correos con Resend, define tambien:
+
+```bash
+RESEND_API_KEY=...
+RESEND_FROM_EMAIL="La Dakini <onboarding@resend.dev>"
+```
+
+`RESEND_FROM_EMAIL` puede apuntar a un remitente verificado en Resend. El valor
+de arriba sirve como punto de partida para pruebas.
+
+En Vercel, configura las mismas variables desde el panel del proyecto.

@@ -58,6 +58,8 @@ function loadGoogleMapsScript(apiKey: string): Promise<void> {
 export default function Contacto() {
   const [form, setForm] = useState({ nombre: "", correo: "", mensaje: "" })
   const [enviado, setEnviado] = useState(false)
+  const [enviando, setEnviando] = useState(false)
+  const [errorEnvio, setErrorEnvio] = useState<string | null>(null)
   const [mapLoading, setMapLoading] = useState(true)
   const [mapError, setMapError] = useState(false)
 
@@ -71,9 +73,48 @@ export default function Contacto() {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setEnviado(true)
+
+    if (enviando) return
+
+    setErrorEnvio(null)
+    setEnviando(true)
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nombre: form.nombre.trim(),
+          correo: form.correo.trim(),
+          mensaje: form.mensaje.trim(),
+        }),
+      })
+
+      const result = (await response.json().catch(() => null)) as
+        | { error?: string }
+        | null
+
+      if (!response.ok) {
+        throw new Error(
+          result?.error || "No hemos podido enviar tu mensaje.",
+        )
+      }
+
+      setEnviado(true)
+      setForm({ nombre: "", correo: "", mensaje: "" })
+    } catch (error) {
+      setErrorEnvio(
+        error instanceof Error
+          ? error.message
+          : "No hemos podido enviar tu mensaje.",
+      )
+    } finally {
+      setEnviando(false)
+    }
   }
 
   useEffect(() => {
@@ -252,10 +293,20 @@ export default function Contacto() {
                 </div>
                 <button
                   type="submit"
+                  disabled={enviando}
                   className="mt-2 w-full rounded-md bg-[#A72F27] py-4 font-sans text-sm tracking-widest text-white uppercase shadow-sm transition-all hover:bg-[#8B2520] active:scale-95"
                 >
-                  Enviar Mensaje
+                  {enviando ? "Enviando..." : "Enviar Mensaje"}
                 </button>
+
+                {errorEnvio ? (
+                  <p
+                    role="alert"
+                    className="font-sans text-[0.8rem] leading-relaxed text-[#A72F27]"
+                  >
+                    {errorEnvio}
+                  </p>
+                ) : null}
               </form>
             )}
           </div>
